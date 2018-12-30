@@ -2,6 +2,8 @@
 
 A minimal TypeScript setup with file watching and serving. No bundling!
 
+**Disclaimer:** This is a "I want to try something out right now" template, it may not fit your production needs.
+
 ## Quick Start
 
 ```bash
