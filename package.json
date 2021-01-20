@@ -1,26 +1,15 @@
 {
-  "name": "typescript-boiler-plate",
-  "version": "0.1.0",
+  "name": "typescript-playground",
+  "version": "1.0.0",
   "description": "",
-  "main": "src/app.ts",
-  "dependencies": {},
-  "devDependencies": {
-    "browser-sync": "^2.26.3",
-    "chokidar-cli": "^1.2.1",
-    "tslint": "^5.12.0",
-    "typescript": "^3.2.2"
-  },
+  "main": "code.js",
   "scripts": {
-    "start": "npm run build && npm run watch & npm run serve",
-    "build": "npm run prep && npx tsc -p . ",
-    "lint": "npx tslint --project .",
-    "serve": "npx browser-sync start --config bs-config.js",
-    "watch": "npm run watch-ts & npm run watch-assets",
-    "watch-ts": "npx tsc -w -p .",
-    "watch-assets": "npx chokidar './src/**/*' -i './src/**/*.ts' -c 'npm run assets'",
-    "prep": "rm -rf ./dist && mkdir ./dist && npm run assets",
-    "assets": "rsync -av --exclude='*.ts' --exclude='*.js' ./src/ ./dist/ --delete"
+    "start": "tsc -w"
   },
-  "author": "Arthur Carabott",
-  "license": "MIT"
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^4.1.2"
+  }
 }
