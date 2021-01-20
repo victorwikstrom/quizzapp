@@ -38,7 +38,12 @@ class Game {
   }
 
   private getRandomNumber() {
-    return Math.floor(Math.random() * Math.floor(20));
+
+    // 0-20
+    // return Math.floor(Math.random() * Math.floor(20));
+
+    // 1-20
+    return Math.floor(Math.random() * (20) + 1);
   }
 
   private getUserInput() {
