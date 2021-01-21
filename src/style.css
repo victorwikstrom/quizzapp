@@ -12,8 +12,16 @@ body {
 
   border: 2px solid black;
 
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+.guess-counter {
+  position: absolute;
+  top: 5%;
+  left: 5%;
 }
