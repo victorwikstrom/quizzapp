@@ -31,7 +31,7 @@ class Game {
 
     this.inputField = document.createElement("input");
     this.guessButton = document.createElement("button");
-    this.guessButton.innerHTML = "Gissa";
+    this.guessButton.innerHTML = "Guess";
 
     this.botNumber = this.getBotNumber();
     this.userNumber = this.getUserInput();
@@ -51,6 +51,7 @@ class Game {
     this.gameWrapper.appendChild(this.guessButton);
     this.gameWrapper.appendChild(this.guessCountElement);
     this.gameWrapper.appendChild(this.opponentElement);
+    
   }
 
   public runGame() {
@@ -104,6 +105,7 @@ class Game {
       this.botAnswer = "User, please guess a higher number!";
     } else {
       this.botAnswer = "User, you are correct!";
+      this.resetGuessCount();
     }
   }
 
@@ -115,10 +117,25 @@ class Game {
       this.botAnswerForOpponent = "Opponent, please guess a higher number!";
     } else {
       this.botAnswerForOpponent = "Opponent, you are correct!";
+      this.resetGuessCount();
     }
   }
 
+  private resetGuessCount() {
+    let resetButton = document.createElement("button");
+    resetButton.innerHTML = "Restart game!";
+    resetButton.addEventListener("click", () => {
+      this.guessCount = 0
+      this.botNumber = this.getBotNumber();
+      this.guessCountElement.innerText = String(this.guessCount);
+      this.gameWrapper.removeChild(resetButton)
+    })
+    this.gameWrapper.appendChild(resetButton);
+  }
+
 }
+
+// END OF GAME CLASS
 
 window.addEventListener("load", () => {
   const game: Game = new Game();
