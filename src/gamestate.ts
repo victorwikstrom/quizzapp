@@ -14,15 +14,12 @@ class GameState {
   public runGame() {
     if (this.currentView === "start") {
       this.startView.show();
-      this.startView.run();
     }
     if (this.currentView === "game") {
       this.gameView.show();
-      this.gameView.run();
     }
     if (this.currentView === "over") {
       this.GameOverView.show();
-      this.GameOverView.run();
     }
   }
 
