@@ -3,6 +3,7 @@ class GameOverView {
 
   constructor() {
     this.gameWrapper = document.createElement("div");
+    document.body.appendChild(this.gameWrapper);
   }
 
   public show() {

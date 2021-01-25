@@ -2,13 +2,13 @@ class GameState {
   currentView: "start" | "game" | "over";
   startView: StartView;
   gameView: GameView;
-  GameOverView: GameOverView;
+  gameOverView: GameOverView;
 
   constructor() {
-    this.currentView = "game";
+    this.currentView = "start";
     this.startView = new StartView();
     this.gameView = new GameView();
-    this.GameOverView = new GameOverView();
+    this.gameOverView = new GameOverView();
   }
 
   public runGame() {
@@ -19,7 +19,7 @@ class GameState {
       this.gameView.show();
     }
     if (this.currentView === "over") {
-      this.GameOverView.show();
+      this.gameOverView.show();
     }
   }
 
@@ -27,17 +27,17 @@ class GameState {
     this.currentView = view;
 
     if (this.currentView === "start") {
-      this.GameOverView.hide();
+      this.gameOverView.hide();
       this.gameView.hide();
       this.startView.show();
     } else if (this.currentView === "game") {
-      this.GameOverView.hide();
+      this.gameOverView.hide();
       this.startView.hide();
       this.gameView.show();
     } else if (this.currentView === "over") {
       this.gameView.hide();
       this.startView.hide();
-      this.GameOverView.show();
+      this.gameOverView.show();
     }
   }
 }

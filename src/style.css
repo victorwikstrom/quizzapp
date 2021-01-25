@@ -20,6 +20,10 @@ body {
   flex-direction: column;
 }
 
+.start-view {
+  background-color: red;
+}
+
 .guess-counter {
   position: absolute;
   top: 5%;

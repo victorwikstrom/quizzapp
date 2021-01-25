@@ -65,8 +65,6 @@ class GameView {
 
   public run() {
     console.log(this.botNumber);
-
-    document.body.appendChild(this.gameWrapper);
     this.guessButton.addEventListener("click", () => {
       this.validateUserInput();
     });
