@@ -9,21 +9,16 @@ class StartView {
     this.startGameButton.innerHTML = "START GAME";
 
     this.gameWrapper.appendChild(this.startGameButton);
-    document.body.appendChild(this.gameWrapper);
   }
 
-  public show() {
+  public run() {
     document.body.appendChild(this.gameWrapper);
-    this.run();
+    this.startGameButton.addEventListener("click", () => {
+      gameState.updateView("game");
+    });
   }
 
   public hide() {
     document.body.removeChild(this.gameWrapper);
-  }
-
-  public run() {
-    this.startGameButton.addEventListener("click", () => {
-      gameState.updateView("game");
-    });
   }
 }

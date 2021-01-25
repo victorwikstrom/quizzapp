@@ -54,20 +54,16 @@ class GameView {
     this.gameWrapper.appendChild(this.opponentElement);
   }
 
-  public show() {
-    document.body.appendChild(this.gameWrapper);
-    this.run();
-  }
-
-  public hide() {
-    document.body.removeChild(this.gameWrapper);
-  }
-
   public run() {
+    document.body.appendChild(this.gameWrapper);
     console.log(this.botNumber);
     this.guessButton.addEventListener("click", () => {
       this.validateUserInput();
     });
+  }
+
+  public hide() {
+    document.body.removeChild(this.gameWrapper);
   }
 
   // nytt
