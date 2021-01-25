@@ -53,6 +53,7 @@ input {
   padding: 0.5rem;
   border-radius: 2rem;
   font-family: 'Gaegu', bold;
+  outline: none;
 
 }
 
