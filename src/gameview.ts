@@ -133,26 +133,33 @@ class GameView {
   // Inte säker på att den även helt anpassar sig efter användarens svar
 
   private getSecondOpponentNumber() {
+    
+    // anv och opp har båda gissat ett för högt tal, opp har gissat högst
     if (this.opponentGuess > this.botNumber && this.userNumber > this.botNumber && this.opponentGuess > this.userNumber) {
       return Math.floor(Math.random() * (this.userNumber - 1) + 1);
       // 1 --> user
 
+    // anv och opp har båda gissat ett för högt tal, anv har gissat högst
     } else if (this.opponentGuess > this.botNumber && this.userNumber > this.botNumber && this.opponentGuess < this.userNumber) {
       return Math.floor(Math.random() * (this.opponentGuess - 1) + 1);
       // 1 --> opp
 
+    // anv och opp har båda gissat ett för lågt svar, opp har gissat högst
     } else if (this.opponentGuess < this.botNumber && this.userNumber < this.botNumber && this.opponentGuess > this.userNumber) {
       return Math.floor(Math.random() * (20 - this.opponentGuess) + this.opponentGuess + 1);
       // opp --> 20
 
+    // anv och opp har båda gissat ett för lågt svar, anv har gissat högst
     } else if (this.opponentGuess < this.botNumber && this.userNumber < this.botNumber && this.opponentGuess < this.userNumber) {
       return Math.floor(Math.random() * (20 - this.userNumber) + this.userNumber + 1);
       // user --> 20
 
+    // opp har gissat för lågt och anv har gissat för högt
     } else if (this.opponentGuess < this.botNumber && this.userNumber > this.botNumber) {
       return Math.floor(Math.random() * (this.userNumber - this.opponentGuess) + this.opponentGuess + 1);
       // opp --> user
 
+      // anv har gissat för lågt och opp har gissat för högt
     } else if (this.opponentGuess > this.botNumber && this.userNumber < this.botNumber) {
       return Math.floor(Math.random() * (this.opponentGuess - this.userNumber) + this.userNumber + 1);
       // user --> opp
