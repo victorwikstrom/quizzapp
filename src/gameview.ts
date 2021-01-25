@@ -31,6 +31,7 @@ class GameView {
 
     this.inputField = document.createElement("input");
     this.guessButton = document.createElement("button");
+    this.guessButton.classList.add("all-buttons");
     this.guessButton.innerHTML = "Gissa";
 
     this.botNumber = this.getBotNumber();

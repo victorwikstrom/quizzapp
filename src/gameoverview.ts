@@ -9,10 +9,11 @@ class GameOverView {
     this.gameWrapper = document.createElement("div");
     this.gameWrapper.classList.add("over-view", "game-wrapper");
   
-    this.gameWrapper.innerText = "Correct! Do you want to play again?";
+    this.gameWrapper.innerText = "Correct! Do you want to play again???";
 
     // Creates a button and offers the player the option to play again (Funkar ej)
     this.restartGame = document.createElement("button");
+    this.restartGame.classList.add("all-buttons");
     this.restartGame.innerHTML = "PLAY AGAIN";
 
     this.gameWrapper.appendChild(this.restartGame);
