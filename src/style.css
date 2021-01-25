@@ -20,6 +20,11 @@ body {
   flex-direction: column;
 }
 
+/* Margin mellan elementen */
+.game-wrapper > * {
+  margin-bottom: 1rem;
+}
+
 .start-view {
   background-color: red;
 }
@@ -28,4 +33,33 @@ body {
   position: absolute;
   top: 5%;
   left: 5%;
+}
+
+/* Test för opponent och textbox */
+
+.opponents {
+  display: flex;
+  flex-direction: row;
+  margin-left: 1rem;
+}
+
+.opponent {
+  height: 100px;
+  width: 200px;
+  background-color: lightskyblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-right: 1rem;
+  padding: 1rem;
+}
+
+.textBox {
+  height: 200px;
+  width: 300px;
+  background-color: palevioletred;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
