@@ -88,6 +88,8 @@ class GameView {
   // gissning är 10, svaret blir "gissa lägre", nästa gissning är 7, svaret blir "gissa högre"
   // så minns inte motståndaren att svaret även måste vara mindre än 10
   // Motståndaren kan även svara samma som den gjort tidigare under omgången
+  
+  /*
   private getOpponentNumber() {
 
     // Från gissning ett och framåt
@@ -102,10 +104,9 @@ class GameView {
         // Gissar på ett högre tal
         let newNumberRange = this.opponentGuess + 1;
         return Math.floor(Math.random() * (20 - newNumberRange) + newNumberRange);
-
-        // Denna fyller egentligen ingen funktion, men behövs för att alla alternativ ska returnera något
       } else {
-        return Math.floor(Math.random() * (20 - 1) + 1);
+        // Denna fyller egentligen ingen funktion, men behövs för att alla alternativ ska returnera något
+        return 0;
       }
 
     } else {
@@ -114,15 +115,43 @@ class GameView {
       return Math.floor(Math.random() * (20 - 1) + 1);
     }
   }
+  */
 
-  // Gissning från motståndare 2
-  private getSecondOpponentNumber() {
-    return Math.floor(Math.random() * (20 - 1) + 1);
+  // Slumpar svar som är lägre än användarens svar om rätt svar ska vara lägre, och högre om rätt svar ska vara högre
+  private getOpponentNumber() {
+    if (this.userNumber > this.botNumber) {
+      return Math.floor(Math.random() * (this.userNumber - 1) + 1);
+    } else if (this.userNumber < this.botNumber) {
+      return Math.floor(Math.random() * (20 - this.userNumber) + this.userNumber);
+    } else {
+      // Denna fyller egentligen ingen funktion, men behövs för att alla alternativ ska returnera något
+      return this.userNumber;
+    }
   }
 
-  // Gissning från motståndare 3
+  // Slumpar svar som är lägre än föregående motståndares svar om rätt svar ska vara lägre, och högre om rätt svar ska vara högre
+  // Behöver fixa så att det även är anpassat efter vad användaren har fått för svar
+  private getSecondOpponentNumber() {
+    if (this.opponentGuess > this.botNumber) {
+      return Math.floor(Math.random() * (this.opponentGuess - 2) + 1);
+    } else if (this.opponentGuess < this.botNumber) {
+      return Math.floor(Math.random() * (20 - this.opponentGuess) + this.opponentGuess);
+    } else {
+      // Denna fyller egentligen ingen funktion, men behövs för att alla alternativ ska returnera något
+      return this.opponentGuess;
+    }
+  }
+
+  // Lägger till ett på föregående motståndares svar om rätt svar är högre och drar av ett om rätt svar är lägre
   private getThirdOpponentNumber() {
-    return Math.floor(Math.random() * (20 - 1) + 1);
+    if (this.opponentGuess2 > this.botNumber) {
+      return this.opponentGuess2 - 1;
+    } else if (this.opponentGuess2 < this.botNumber) {
+      return this.opponentGuess2 + 1;
+    } else {
+      // Denna fyller egentligen ingen funktion, men behövs för att alla alternativ ska returnera något
+      return this.opponentGuess2;
+    }
   }
 
   // Spelledarens nummer (rätt svar)
@@ -148,12 +177,24 @@ class GameView {
     this.textBox.innerHTML = this.getBotAnswer(this.userNumber)
 
     // Lagt till svar för två nya motståndare
-    this.opponentElement.innerHTML = "Opponent 1:" + '<br>' + String(this.opponentGuess) + '<br>' + this.checkOpponentAnswer(this.opponentGuess);
-    this.opponentElement2.innerHTML = "Opponent 2:" + '<br>' + + String(this.opponentGuess2) + '<br>' + this.checkOpponentAnswer(this.opponentGuess2);
-    this.opponentElement3.innerHTML = "Opponent 3:" + '<br>' + String(this.opponentGuess3) + '<br>' + this.checkOpponentAnswer(this.opponentGuess3);
+    setTimeout(() => {
+      this.opponentElement.innerHTML = "Opponent 1:" + '<br>' + + String(this.opponentGuess) + '<br>' + this.checkOpponentAnswer(this.opponentGuess);
+      this.opponentWins(this.opponentGuess);
+    }, 2000)
+
+    setTimeout(() => {
+      this.opponentElement2.innerHTML = "Opponent 2:" + '<br>' + + String(this.opponentGuess2) + '<br>' + this.checkOpponentAnswer(this.opponentGuess2);
+      this.opponentWins(this.opponentGuess2);
+    }, 4000);
+
+    setTimeout(() => {
+      this.opponentElement3.innerHTML = "Opponent 3:" + '<br>' + String(this.opponentGuess3) + '<br>' + this.checkOpponentAnswer(this.opponentGuess3);
+      this.opponentWins(this.opponentGuess3);
+    }, 6000);
+
 
     this.updateGuessCount()
-    this.getWinner();
+    this.userWins();
   }
 
   // Ökar antal gissningar med 1
@@ -162,22 +203,19 @@ class GameView {
     this.guessCountElement.innerText = String(this.guessCount);
   }
 
-  // Test för att säga till när någon har vunnit
-  private getWinner() {
+  // När användaren vinner
+  private userWins() {
     if (this.userNumber == this.botNumber) {
       console.log('Grattis User, du vann! Det tog bara ' + this.guessCount + ' gissningar')
       // gameState.updateView("over");
     }
-    if (this.opponentGuess == this.botNumber) {
-      console.log('Grattis Opponent 1, du vann!')
-      // gameState.updateView("over");
-    }
-    if (this.opponentGuess2 == this.botNumber) {
-      console.log('Grattis Opponent 2, du vann!')
-      // gameState.updateView("over");
-    }
-    if (this.opponentGuess3 == this.botNumber) {
-      console.log('Grattis Opponent 3, du vann!')
+  }
+
+  // När en motståndare vinner
+  private opponentWins(guess: number) {
+
+    if (guess == this.botNumber) {
+      console.log('Grattis Opponent, du vann!')
       // gameState.updateView("over");
     }
   }
