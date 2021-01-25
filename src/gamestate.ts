@@ -35,6 +35,7 @@ class GameState {
     } else if (this.currentView === "over") {
       this.gameView.hide();
       this.gameOverView.run();
+      
     }
   }
 }

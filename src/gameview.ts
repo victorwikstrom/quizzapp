@@ -52,6 +52,7 @@ class GameView {
     this.gameWrapper.appendChild(this.guessButton);
     this.gameWrapper.appendChild(this.guessCountElement);
     this.gameWrapper.appendChild(this.opponentElement);
+    
   }
 
   public run() {
@@ -107,7 +108,7 @@ class GameView {
     } else if (number < this.botNumber) {
       this.botAnswer = "User, please guess a higher number!";
     } else {
-      this.botAnswer = "User, you are correct!";
+      gameState.updateView("over");
     }
   }
 

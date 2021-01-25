@@ -24,6 +24,10 @@ body {
   background-color: red;
 }
 
+.over-view {
+  background-color: red;
+}
+
 .guess-counter {
   position: absolute;
   top: 5%;

@@ -5,6 +5,7 @@ class StartView {
   constructor() {
     this.gameWrapper = document.createElement("div");
     this.gameWrapper.classList.add("game-wrapper", "start-view");
+
     this.startGameButton = document.createElement("button");
     this.startGameButton.innerHTML = "START GAME";
 
