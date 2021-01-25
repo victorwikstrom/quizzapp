@@ -59,16 +59,8 @@ class GameView {
     // this.gameWrapper.appendChild(this.opponentElement);
   }
 
-  public show() {
-    document.body.appendChild(this.gameWrapper);
-    this.run();
-  }
-
-  public hide() {
-    document.body.removeChild(this.gameWrapper);
-  }
-
   public run() {
+    document.body.appendChild(this.gameWrapper);
     console.log(this.botNumber);
     this.guessButton.addEventListener("click", () => {
       this.gameWrapper.appendChild(this.opponentElement);
@@ -76,12 +68,15 @@ class GameView {
     });
   }
 
+  public hide() {
+    document.body.removeChild(this.gameWrapper);
+  }
+
   // Detta gör så att motståndaren anpassar svaret utifrån om man ska gissa högre eller lägre
   // Det blir dock alltid helt random utifrån högre/lägre, så t.ex. om motståndarens första
   // gissning är 10, svaret blir "gissa lägre", nästa gissning är 7, svaret blir "gissa högre"
   // så minns inte motståndaren att svaret även måste vara mindre än 10
   // Motståndaren kan även svara samma som den gjort tidigare under omgången
-
   private getOpponentNumber() {
 
     let numberRange = 20;
