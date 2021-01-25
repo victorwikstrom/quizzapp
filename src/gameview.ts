@@ -122,7 +122,7 @@ class GameView {
     if (this.userNumber > this.botNumber) {
       return Math.floor(Math.random() * (this.userNumber - 1) + 1);
     } else if (this.userNumber < this.botNumber) {
-      return Math.floor(Math.random() * (20 - this.userNumber + 1) + this.userNumber);
+      return Math.floor(Math.random() * (20 - this.userNumber) + this.userNumber + 1);
     } else {
       // Denna fyller egentligen ingen funktion, men behövs för att alla alternativ ska returnera något
       return this.userNumber;
@@ -142,19 +142,19 @@ class GameView {
       // 1 --> opp
 
     } else if (this.opponentGuess < this.botNumber && this.userNumber < this.botNumber && this.opponentGuess > this.userNumber) {
-      return Math.floor(Math.random() * (20 - this.opponentGuess + 1) + this.opponentGuess);
+      return Math.floor(Math.random() * (20 - this.opponentGuess) + this.opponentGuess + 1);
       // opp --> 20
 
     } else if (this.opponentGuess < this.botNumber && this.userNumber < this.botNumber && this.opponentGuess < this.userNumber) {
-      return Math.floor(Math.random() * (20 - this.userNumber + 1) + this.userNumber);
+      return Math.floor(Math.random() * (20 - this.userNumber) + this.userNumber + 1);
       // user --> 20
 
     } else if (this.opponentGuess < this.botNumber && this.userNumber > this.botNumber) {
-      return Math.floor(Math.random() * (this.userNumber -1 - this.opponentGuess) + this.opponentGuess);
+      return Math.floor(Math.random() * (this.userNumber - this.opponentGuess) + this.opponentGuess + 1);
       // opp --> user
 
     } else if (this.opponentGuess > this.botNumber && this.userNumber < this.botNumber) {
-      return Math.floor(Math.random() * (this.opponentGuess -1 - this.userNumber) + this.userNumber);
+      return Math.floor(Math.random() * (this.opponentGuess - this.userNumber) + this.userNumber + 1);
       // user --> opp
 
     } else {
