@@ -29,3 +29,11 @@ body {
   top: 5%;
   left: 5%;
 }
+
+.nameInput {
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  border: none;
+  padding: 10px 20px;
+}
