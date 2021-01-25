@@ -122,7 +122,7 @@ class GameView {
     if (this.userNumber > this.botNumber) {
       return Math.floor(Math.random() * (this.userNumber - 1) + 1);
     } else if (this.userNumber < this.botNumber) {
-      return Math.floor(Math.random() * (20 - this.userNumber) + this.userNumber);
+      return Math.floor(Math.random() * (20 - this.userNumber + 1) + this.userNumber);
     } else {
       // Denna fyller egentligen ingen funktion, men behövs för att alla alternativ ska returnera något
       return this.userNumber;
@@ -130,12 +130,33 @@ class GameView {
   }
 
   // Slumpar svar som är lägre än föregående motståndares svar om rätt svar ska vara lägre, och högre om rätt svar ska vara högre
-  // Behöver fixa så att det även är anpassat efter vad användaren har fått för svar
+  // Inte säker på att den även helt anpassar sig efter användarens svar
+
   private getSecondOpponentNumber() {
-    if (this.opponentGuess > this.botNumber) {
-      return Math.floor(Math.random() * (this.opponentGuess - 2) + 1);
-    } else if (this.opponentGuess < this.botNumber) {
-      return Math.floor(Math.random() * (20 - this.opponentGuess) + this.opponentGuess);
+    if (this.opponentGuess > this.botNumber && this.userNumber > this.botNumber && this.opponentGuess > this.userNumber) {
+      return Math.floor(Math.random() * (this.userNumber - 1) + 1);
+      // 1 --> user
+
+    } else if (this.opponentGuess > this.botNumber && this.userNumber > this.botNumber && this.opponentGuess < this.userNumber) {
+      return Math.floor(Math.random() * (this.opponentGuess - 1) + 1);
+      // 1 --> opp
+
+    } else if (this.opponentGuess < this.botNumber && this.userNumber < this.botNumber && this.opponentGuess > this.userNumber) {
+      return Math.floor(Math.random() * (20 - this.opponentGuess + 1) + this.opponentGuess);
+      // opp --> 20
+
+    } else if (this.opponentGuess < this.botNumber && this.userNumber < this.botNumber && this.opponentGuess < this.userNumber) {
+      return Math.floor(Math.random() * (20 - this.userNumber + 1) + this.userNumber);
+      // user --> 20
+
+    } else if (this.opponentGuess < this.botNumber && this.userNumber > this.botNumber) {
+      return Math.floor(Math.random() * (this.userNumber -1 - this.opponentGuess) + this.opponentGuess);
+      // opp --> user
+
+    } else if (this.opponentGuess > this.botNumber && this.userNumber < this.botNumber) {
+      return Math.floor(Math.random() * (this.opponentGuess -1 - this.userNumber) + this.userNumber);
+      // user --> opp
+
     } else {
       // Denna fyller egentligen ingen funktion, men behövs för att alla alternativ ska returnera något
       return this.opponentGuess;
