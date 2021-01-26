@@ -56,7 +56,6 @@ class GameView {
     this.opponentElement2 = document.createElement("div");
     this.opponentElement3 = document.createElement("div");
 
-    // css-styling för opponent-elementen
     this.opponentElement.classList.add('opponent');
     this.opponentElement2.classList.add('opponent');
     this.opponentElement3.classList.add('opponent');
@@ -195,7 +194,7 @@ class GameView {
 
       if (this.userNumber !== this.botNumber) {
         this.opponentGuess = this.getRandomInt(this.min, this.max);
-        this.opponentElement.innerHTML = "Opponent 1:" + '<br>' + + String(this.opponentGuess) + '<br>' + this.getAnswerForOpponent(this.opponentGuess);
+        this.opponentElement.innerHTML = "Opponent 1:" + '<br>' + String(this.opponentGuess) + '<br>' + this.getAnswerForOpponent(this.opponentGuess);
         this.updateMinMax(this.opponentGuess, this.userNumber)
         this.getWinner(this.opponentGuess);
         console.log('Opponent 1: ' + this.opponentGuess)
@@ -207,7 +206,7 @@ class GameView {
 
       if (this.userNumber !== this.botNumber || this.opponentGuess !== this.botNumber) {
         this.opponentGuess2 = this.getRandomInt(this.min, this.max);
-        this.opponentElement2.innerHTML = "Opponent 2:" + '<br>' + + String(this.opponentGuess2) + '<br>' + this.getAnswerForOpponent(this.opponentGuess2);
+        this.opponentElement2.innerHTML = "Opponent 2:" + '<br>' + String(this.opponentGuess2) + '<br>' + this.getAnswerForOpponent(this.opponentGuess2);
         this.updateMinMax(this.opponentGuess2, this.opponentGuess)
         this.getWinner(this.opponentGuess2);
         console.log('Opponent 2: ' + this.opponentGuess2)
