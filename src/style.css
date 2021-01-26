@@ -71,7 +71,22 @@ span {
 
 input {
   font-family: 'Gaegu', bold;
+}
 
+.view-highscore {
+  text-align: center;
+  background-color: #ffcea8;
+  padding-top: 0.1rem;
+  border-radius: 1rem;
+  width: 10rem;
+}
+
+.logo {
+  background-image:url(/images/logo.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 40vh;
+  height: 40vh;
 }
 .present-opponent {
   display: flex;
@@ -96,7 +111,6 @@ input {
   border-radius: 2rem;
   font-family: 'Gaegu', bold;
   outline: none;
-
 }
 
 button:hover {

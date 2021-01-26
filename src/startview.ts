@@ -6,9 +6,15 @@ class StartView {
   private presentOpponent2: HTMLElement;
   private presentOpponent3: HTMLElement;
 
+  private gameLogo: HTMLElement;
+
+
   constructor() {
     this.gameWrapper = document.createElement("div");
     this.gameWrapper.classList.add("game-wrapper", "start-view");
+
+    this.gameLogo = document.createElement('div');
+    this.gameLogo.classList.add("logo");
 
     this.startGameButton = document.createElement("button");
     this.startGameButton.classList.add("all-buttons");
@@ -38,6 +44,7 @@ class StartView {
 
 
     this.startGameButton.innerHTML = "START GAME";
+    this.gameWrapper.appendChild(this.gameLogo);
 
     this.gameWrapper.appendChild(this.startGameButton);
   }
@@ -53,6 +60,8 @@ class StartView {
       gameState.updateView("game");
 
     });
+    
+    
   }
 
   public hide() {
