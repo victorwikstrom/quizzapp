@@ -187,7 +187,7 @@ class GameView {
 
     this.updateGuessCount()
     this.getWinner(this.userNumber);
-    console.log(this.min, this.max)
+    console.log('Min: ' + this.min + ', Max: ' + this.max)
     this.textBox.innerHTML = this.getAnswerForUser(this.userNumber)
 
     // Lagt till svar för två nya motståndare
@@ -198,7 +198,8 @@ class GameView {
         this.opponentElement.innerHTML = "Opponent 1:" + '<br>' + + String(this.opponentGuess) + '<br>' + this.getAnswerForOpponent(this.opponentGuess);
         this.updateMinMax(this.opponentGuess, this.userNumber)
         this.getWinner(this.opponentGuess);
-        console.log(this.min, this.max)
+        console.log('Opponent 1: ' + this.opponentGuess)
+        console.log('Min: ' + this.min + ', Max: ' + this.max)
       }
     }, 2000)
 
@@ -209,7 +210,8 @@ class GameView {
         this.opponentElement2.innerHTML = "Opponent 2:" + '<br>' + + String(this.opponentGuess2) + '<br>' + this.getAnswerForOpponent(this.opponentGuess2);
         this.updateMinMax(this.opponentGuess2, this.opponentGuess)
         this.getWinner(this.opponentGuess2);
-        console.log(this.min, this.max)
+        console.log('Opponent 2: ' + this.opponentGuess2)
+        console.log('Min: ' + this.min + ', Max: ' + this.max)
       }
     }, 4000);
 
@@ -220,7 +222,8 @@ class GameView {
         this.opponentElement3.innerHTML = "Opponent 3:" + '<br>' + String(this.opponentGuess3) + '<br>' + this.getAnswerForOpponent(this.opponentGuess3);
         this.updateMinMax(this.opponentGuess3, this.opponentGuess2)
         this.getWinner(this.opponentGuess3);
-        console.log(this.min, this.max)
+        console.log('Opponent 2: ' + this.opponentGuess3)
+        console.log('Min: ' + this.min + ', Max: ' + this.max)
       }
 
     }, 6000);
