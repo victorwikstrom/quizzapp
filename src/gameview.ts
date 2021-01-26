@@ -102,7 +102,7 @@ class GameView {
     if (guess <= this.max && guess >= this.min) {
 
       if (guess > this.botNumber && previousGuess > this.botNumber && guess > previousGuess) {
-        
+
         this.min = this.min;
 
         if (previousGuess >= this.max) {
@@ -159,7 +159,7 @@ class GameView {
     } else if (guess < this.botNumber) {
       this.min = guess + 1;
       this.max = this.max;
-    } 
+    }
   }
 
   // Gissar alltid på ett nummer lägre eller ett nummer högre än föregående spelare
@@ -184,8 +184,8 @@ class GameView {
   // Kör funktionerna som genererar nya nummer och skriver ut dessa på sidan
   private validateUserInput() {
 
-    // Uppdaterar användarens gissning och genererar nya gissningar från motståndarna
     this.userNumber = this.getUserInput();
+    console.log('User: ' + this.userNumber);
 
     if (this.guessCount > 0) {
       this.updateMinMax(this.userNumber, this.opponentGuess3)
@@ -198,32 +198,37 @@ class GameView {
     console.log('Min: ' + this.min + ', Max: ' + this.max)
     this.textBox.innerHTML = this.getAnswerForUser(this.userNumber)
 
-    // Lagt till svar för två nya motståndare
+    this.checkOpponentAnswers();
+  }
+
+  // Genererar svar för motståndarna
+  private checkOpponentAnswers() {
+
     setTimeout(() => {
-        this.opponentGuess = this.getRandomInt(this.min, this.max);
-        this.opponentElement.innerHTML = "Opponent 1:" + '<br>' + String(this.opponentGuess) + '<br>' + this.getAnswerForOpponent(this.opponentGuess);
-        this.updateMinMax(this.opponentGuess, this.userNumber)
-        this.getWinner(this.opponentGuess);
-        console.log('Opponent 1: ' + this.opponentGuess)
-        console.log('Min: ' + this.min + ', Max: ' + this.max)
+      this.opponentGuess = this.getRandomInt(this.min, this.max);
+      this.opponentElement.innerHTML = "Opponent 1:" + '<br>' + String(this.opponentGuess) + '<br>' + this.getAnswerForOpponent(this.opponentGuess);
+      this.updateMinMax(this.opponentGuess, this.userNumber)
+      this.getWinner(this.opponentGuess);
+      console.log('Opponent 1: ' + this.opponentGuess)
+      console.log('Min: ' + this.min + ', Max: ' + this.max)
     }, 2000)
 
     setTimeout(() => {
-        this.opponentGuess2 = this.getDumbGuess(this.opponentGuess)
-        this.opponentElement2.innerHTML = "Opponent 2:" + '<br>' + String(this.opponentGuess2) + '<br>' + this.getAnswerForOpponent(this.opponentGuess2);
-        this.updateMinMax(this.opponentGuess2, this.opponentGuess)
-        this.getWinner(this.opponentGuess2);
-        console.log('Opponent 2: ' + this.opponentGuess2)
-        console.log('Min: ' + this.min + ', Max: ' + this.max)
+      this.opponentGuess2 = this.getDumbGuess(this.opponentGuess)
+      this.opponentElement2.innerHTML = "Opponent 2:" + '<br>' + String(this.opponentGuess2) + '<br>' + this.getAnswerForOpponent(this.opponentGuess2);
+      this.updateMinMax(this.opponentGuess2, this.opponentGuess)
+      this.getWinner(this.opponentGuess2);
+      console.log('Opponent 2: ' + this.opponentGuess2)
+      console.log('Min: ' + this.min + ', Max: ' + this.max)
     }, 4000);
 
     setTimeout(() => {
-        this.opponentGuess3 = this.getRandomInt(1, 100);
-        this.opponentElement3.innerHTML = "Opponent 3:" + '<br>' + String(this.opponentGuess3) + '<br>' + this.getAnswerForOpponent(this.opponentGuess3);
-        this.updateMinMax(this.opponentGuess3, this.opponentGuess2)
-        this.getWinner(this.opponentGuess3);
-        console.log('Opponent 3: ' + this.opponentGuess3)
-        console.log('Min: ' + this.min + ', Max: ' + this.max)
+      this.opponentGuess3 = this.getRandomInt(1, 100);
+      this.opponentElement3.innerHTML = "Opponent 3:" + '<br>' + String(this.opponentGuess3) + '<br>' + this.getAnswerForOpponent(this.opponentGuess3);
+      this.updateMinMax(this.opponentGuess3, this.opponentGuess2)
+      this.getWinner(this.opponentGuess3);
+      console.log('Opponent 3: ' + this.opponentGuess3)
+      console.log('Min: ' + this.min + ', Max: ' + this.max)
     }, 6000);
   }
 
