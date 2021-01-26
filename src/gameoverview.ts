@@ -22,10 +22,10 @@ class GameOverView {
   }
 
   public run() {
-    //Sends player back to gameview, men det funkar ju inteeeeeeee
+    //Sends player back to startview
     document.body.appendChild(this.gameWrapper);
     this.restartGame.addEventListener("click", () => {
-      gameState.updateView("game");
+    location.reload();
     });
     
   }
