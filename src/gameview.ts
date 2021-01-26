@@ -151,13 +151,13 @@ class GameView {
   }
 
   // Uppdaterar this.min och this.max efter användarens första gissning
-  private updateMinMaxFirstRound() {
-    if (this.userNumber > this.botNumber) {
+  private updateMinMaxFirstRound(guess: number) {
+    if (guess > this.botNumber) {
       this.min = this.min;
-      this.max = this.userNumber - 1;
+      this.max = guess - 1;
 
-    } else if (this.userNumber < this.botNumber) {
-      this.min = this.userNumber + 1;
+    } else if (guess < this.botNumber) {
+      this.min = guess + 1;
       this.max = this.max;
     } 
   }
@@ -181,7 +181,7 @@ class GameView {
     if (this.guessCount > 0) {
       this.updateMinMax(this.userNumber, this.opponentGuess3)
     } else {
-      this.updateMinMaxFirstRound()
+      this.updateMinMaxFirstRound(this.userNumber);
     }
 
     this.updateGuessCount()
@@ -221,7 +221,7 @@ class GameView {
         this.opponentElement3.innerHTML = "Opponent 3:" + '<br>' + String(this.opponentGuess3) + '<br>' + this.getAnswerForOpponent(this.opponentGuess3);
         this.updateMinMax(this.opponentGuess3, this.opponentGuess2)
         this.getWinner(this.opponentGuess3);
-        console.log('Opponent 2: ' + this.opponentGuess3)
+        console.log('Opponent 3: ' + this.opponentGuess3)
         console.log('Min: ' + this.min + ', Max: ' + this.max)
       }
 
