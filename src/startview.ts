@@ -9,7 +9,7 @@ class StartView {
     this.gameWrapper.classList.add("game-wrapper", "start-view");
     this.startGameButton = document.createElement("button");
     this.startGameButton.innerHTML = "START GAME";
-    this.gameInstructions = document.createElement("paragraph");
+    this.gameInstructions = document.createElement("p");
     this.gameInstructions.innerText = "Guess the correct number before the bot"
     this.inputName = document.createElement("input");
     this.inputName.classList.add ("nameInput")
