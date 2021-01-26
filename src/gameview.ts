@@ -82,6 +82,7 @@ class GameView {
       this.gameWrapper.appendChild(this.opponents);
 
       this.validateUserInput();
+      this.checkOpponentAnswers();
     });
   }
 
@@ -181,7 +182,7 @@ class GameView {
     return Number(this.inputField.value);
   }
 
-  // Kör funktionerna som genererar nya nummer och skriver ut dessa på sidan
+  // Hämtar användarens gissning 
   private validateUserInput() {
 
     this.userNumber = this.getUserInput();
@@ -197,8 +198,6 @@ class GameView {
     this.getWinner(this.userNumber);
     console.log('Min: ' + this.min + ', Max: ' + this.max)
     this.textBox.innerHTML = this.getAnswerForUser(this.userNumber)
-
-    this.checkOpponentAnswers();
   }
 
   // Genererar svar för motståndarna
