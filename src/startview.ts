@@ -24,7 +24,11 @@ class StartView {
     this.presentOpponent2 = document.createElement("span");
     this.presentOpponent3 = document.createElement("span");
     this.presentOpponent.classList.add("present-opponent");
+
+    this.gameWrapper.appendChild(this.gameLogo);
+
     this.gameWrapper.appendChild(this.presentOpponent);
+
     this.presentOpponent.classList.add("present-opponent1");
     this.presentOpponent.appendChild(this.presentOpponent1);
     this.presentOpponent.classList.add("present-opponent2");
@@ -44,7 +48,6 @@ class StartView {
 
 
     this.startGameButton.innerHTML = "START GAME";
-    this.gameWrapper.appendChild(this.gameLogo);
 
     this.gameWrapper.appendChild(this.startGameButton);
   }

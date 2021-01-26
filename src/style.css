@@ -85,8 +85,8 @@ input {
   background-image:url(/images/logo.png);
   background-repeat: no-repeat;
   background-size: cover;
-  width: 40vh;
-  height: 40vh;
+  width: 30vh;
+  height: 30vh;
 }
 .present-opponent {
   display: flex;
