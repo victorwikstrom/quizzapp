@@ -32,6 +32,7 @@ class GameView {
 
     this.inputField = document.createElement("input");
     this.guessButton = document.createElement("button");
+    this.guessButton.classList.add("all-buttons");
     this.guessButton.innerHTML = "Gissa";
 
     this.botNumber = this.getBotNumber();
@@ -257,6 +258,7 @@ class GameView {
     } else if (number < this.botNumber) {
       return "User, please guess a higher number!";
     } else {
+      gameState.updateView("over");
       return "User, you are correct!";
     }
   }
