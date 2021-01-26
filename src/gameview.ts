@@ -162,6 +162,15 @@ class GameView {
     } 
   }
 
+  // Gissar alltid på ett nummer lägre eller ett nummer högre än föregående spelare
+  private getDumbGuess(previousGuess: number) {
+    if (previousGuess > this.botNumber) {
+      return previousGuess - 1;
+    } else {
+      return previousGuess + 1;
+    }
+  }
+
   // Spelledarens nummer (rätt svar)
   private getBotNumber() {
     return Math.floor(Math.random() * (this.max - this.min) + this.min);
@@ -191,40 +200,30 @@ class GameView {
 
     // Lagt till svar för två nya motståndare
     setTimeout(() => {
-
-      if (this.userNumber !== this.botNumber) {
         this.opponentGuess = this.getRandomInt(this.min, this.max);
         this.opponentElement.innerHTML = "Opponent 1:" + '<br>' + String(this.opponentGuess) + '<br>' + this.getAnswerForOpponent(this.opponentGuess);
         this.updateMinMax(this.opponentGuess, this.userNumber)
         this.getWinner(this.opponentGuess);
         console.log('Opponent 1: ' + this.opponentGuess)
         console.log('Min: ' + this.min + ', Max: ' + this.max)
-      }
     }, 2000)
 
     setTimeout(() => {
-
-      if (this.userNumber !== this.botNumber || this.opponentGuess !== this.botNumber) {
-        this.opponentGuess2 = this.getRandomInt(this.min, this.max);
+        this.opponentGuess2 = this.getDumbGuess(this.opponentGuess)
         this.opponentElement2.innerHTML = "Opponent 2:" + '<br>' + String(this.opponentGuess2) + '<br>' + this.getAnswerForOpponent(this.opponentGuess2);
         this.updateMinMax(this.opponentGuess2, this.opponentGuess)
         this.getWinner(this.opponentGuess2);
         console.log('Opponent 2: ' + this.opponentGuess2)
         console.log('Min: ' + this.min + ', Max: ' + this.max)
-      }
     }, 4000);
 
     setTimeout(() => {
-
-      if (this.userNumber !== this.botNumber || this.opponentGuess !== this.botNumber || this.opponentGuess2 !== this.botNumber) {
-        this.opponentGuess3 = this.getRandomInt(this.min, this.max);
+        this.opponentGuess3 = this.getRandomInt(1, 100);
         this.opponentElement3.innerHTML = "Opponent 3:" + '<br>' + String(this.opponentGuess3) + '<br>' + this.getAnswerForOpponent(this.opponentGuess3);
         this.updateMinMax(this.opponentGuess3, this.opponentGuess2)
         this.getWinner(this.opponentGuess3);
         console.log('Opponent 3: ' + this.opponentGuess3)
         console.log('Min: ' + this.min + ', Max: ' + this.max)
-      }
-
     }, 6000);
   }
 
