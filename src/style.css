@@ -20,7 +20,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: column; 
 }
 
 /* Margin mellan elementen */
@@ -85,9 +85,23 @@ input {
   background-image:url(/images/logo.png);
   background-repeat: no-repeat;
   background-size: cover;
-  width: 40vh;
-  height: 40vh;
+  width: 30vh;
+  height: 30vh;
 }
+.present-opponent {
+  display: flex;
+}
+
+.present-opponent > span {
+  
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  padding: .4rem;
+  margin: .2rem;
+}
+
 
 /* //Buttons  */
 .all-buttons {
