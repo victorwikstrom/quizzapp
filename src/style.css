@@ -20,7 +20,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: column; 
 }
 
 /* Margin mellan elementen */
@@ -73,6 +73,20 @@ input {
   font-family: 'Gaegu', bold;
 
 }
+.present-opponent {
+  display: flex;
+}
+
+.present-opponent > span {
+  
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  padding: .4rem;
+  margin: .2rem;
+}
+
 
 /* //Buttons  */
 .all-buttons {
