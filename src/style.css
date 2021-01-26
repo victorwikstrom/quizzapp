@@ -20,7 +20,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: column; 
 }
 
 /* Margin mellan elementen */
@@ -71,8 +71,37 @@ span {
 
 input {
   font-family: 'Gaegu', bold;
-
 }
+
+.view-highscore {
+  text-align: center;
+  background-color: #ffcea8;
+  padding-top: 0.1rem;
+  border-radius: 1rem;
+  width: 10rem;
+}
+
+.logo {
+  background-image:url(/images/logo.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 30vh;
+  height: 30vh;
+}
+.present-opponent {
+  display: flex;
+}
+
+.present-opponent > span {
+  
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  padding: .4rem;
+  margin: .2rem;
+}
+
 
 /* //Buttons  */
 .all-buttons {
@@ -82,7 +111,6 @@ input {
   border-radius: 2rem;
   font-family: 'Gaegu', bold;
   outline: none;
-
 }
 
 button:hover {
