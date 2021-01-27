@@ -21,6 +21,9 @@ class GameView {
   private opponentGuess2: number;
   private opponentGuess3: number;
 
+  private min: number;
+  private max: number;
+
   constructor() {
 
     this.gameWrapper = document.createElement("div");
@@ -28,12 +31,15 @@ class GameView {
 
     this.textBox = document.createElement("span");
     this.textBox.classList.add('textBox');
-    this.textBox.innerText = "Guess a number between 1-20!";
+    this.textBox.innerText = "Guess a number between 1-100!";
 
     this.inputField = document.createElement("input");
     this.guessButton = document.createElement("button");
     this.guessButton.classList.add("all-buttons");
     this.guessButton.innerHTML = "Gissa";
+
+    this.min = 1;
+    this.max = 100;
 
     this.botNumber = this.getBotNumber();
     this.userNumber = this.getUserInput();
@@ -50,14 +56,13 @@ class GameView {
     this.opponentElement2 = document.createElement("div");
     this.opponentElement3 = document.createElement("div");
 
-    // css-styling för opponent-elementen
     this.opponentElement.classList.add('opponent');
     this.opponentElement2.classList.add('opponent');
     this.opponentElement3.classList.add('opponent');
 
-    this.opponentGuess = this.getOpponentNumber();
-    this.opponentGuess2 = this.getSecondOpponentNumber();
-    this.opponentGuess3 = this.getThirdOpponentNumber();
+    this.opponentGuess = this.getRandomInt(this.min, this.max);
+    this.opponentGuess2 = this.getRandomInt(this.min, this.max);
+    this.opponentGuess3 = this.getRandomInt(this.min, this.max);
 
     this.gameWrapper.appendChild(this.textBox);
     this.gameWrapper.appendChild(this.inputField);
@@ -77,6 +82,7 @@ class GameView {
       this.gameWrapper.appendChild(this.opponents);
 
       this.validateUserInput();
+      this.checkOpponentAnswers();
     });
   }
 
@@ -84,82 +90,91 @@ class GameView {
     document.body.removeChild(this.gameWrapper);
   }
 
+  // Returnerar ett random tal mellan min och max
   private getRandomInt(min: number, max: number) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min);
   }
 
-  // Slumpar svar som är lägre än användarens svar om rätt svar ska vara lägre, och högre om rätt svar ska vara högre
-  private getOpponentNumber() {
-    if (this.userNumber > this.botNumber) {
-      //return Math.floor(Math.random() * (this.userNumber - 1) + 1);
-      return this.getRandomInt(1, this.userNumber)
-    } else if (this.userNumber < this.botNumber) {
-      return this.getRandomInt(this.userNumber, 20)
-      // return Math.floor(Math.random() * (20 - this.userNumber) + this.userNumber);
-    } else {
-      // Denna fyller egentligen ingen funktion, men behövs för att alla alternativ ska returnera något
-      return this.userNumber;
+  // Uppdaterar this.min och this.man beroende på vad användaren och motståndarna gissar
+  private updateMinMax(guess: number, previousGuess: number) {
+
+    if (guess <= this.max && guess >= this.min) {
+
+      if (guess > this.botNumber && previousGuess > this.botNumber && guess > previousGuess) {
+
+        this.min = this.min;
+
+        if (previousGuess >= this.max) {
+          this.max = this.max;
+        } else {
+          this.max = previousGuess - 1;
+        }
+
+      } else if (guess > this.botNumber && previousGuess > this.botNumber && guess < previousGuess) {
+        this.min = this.min;
+        this.max = guess - 1;
+
+      } else if (guess < this.botNumber && previousGuess < this.botNumber && guess > previousGuess) {
+        this.min = guess + 1;
+        this.max = this.max;
+
+      } else if (guess < this.botNumber && previousGuess < this.botNumber && guess < previousGuess) {
+
+        if (previousGuess <= this.min) {
+          this.min = this.min
+        } else {
+          this.min = previousGuess + 1;
+        }
+        this.max = this.max;
+
+      } else if (guess < this.botNumber && previousGuess > this.botNumber) {
+        this.min = guess + 1;
+
+        if (previousGuess >= this.max) {
+          this.max = this.max;
+        } else {
+          this.max = previousGuess - 1;
+        }
+
+      } else if (guess > this.botNumber && previousGuess < this.botNumber) {
+
+        if (previousGuess <= this.min) {
+          this.min = this.min;
+        } else {
+          this.min = previousGuess + 1;
+        }
+
+        this.max = guess - 1;
+      }
     }
   }
 
-  // Slumpar svar som är lägre än föregående motståndares svar om rätt svar ska vara lägre, och högre om rätt svar ska vara högre
-  // Inte säker på att den även helt anpassar sig efter användarens svar :(
-  private getSecondOpponentNumber() {
+  // Uppdaterar this.min och this.max efter användarens första gissning
+  private updateMinMaxFirstRound(guess: number) {
+    if (guess > this.botNumber) {
+      this.min = this.min;
+      this.max = guess - 1;
 
-    // anv och opp har båda gissat ett för högt tal, opp har gissat högst
-    if (this.opponentGuess > this.botNumber && this.userNumber > this.botNumber && this.opponentGuess > this.userNumber) {
-      return this.getRandomInt(1, this.userNumber)
-      // 1 --> user
-
-      // anv och opp har båda gissat ett för högt tal, anv har gissat högst
-    } else if (this.opponentGuess > this.botNumber && this.userNumber > this.botNumber && this.opponentGuess < this.userNumber) {
-      return this.getRandomInt(1, this.opponentGuess)
-      // 1 --> opp
-
-      // anv och opp har båda gissat ett för lågt svar, opp har gissat högst
-    } else if (this.opponentGuess < this.botNumber && this.userNumber < this.botNumber && this.opponentGuess > this.userNumber) {
-      return this.getRandomInt(this.opponentGuess, 20)
-      // opp --> 20
-
-      // anv och opp har båda gissat ett för lågt svar, anv har gissat högst
-    } else if (this.opponentGuess < this.botNumber && this.userNumber < this.botNumber && this.opponentGuess < this.userNumber) {
-      return this.getRandomInt(this.userNumber, 20)
-      // user --> 20
-
-      // opp har gissat för lågt och anv har gissat för högt
-    } else if (this.opponentGuess < this.botNumber && this.userNumber > this.botNumber) {
-      return this.getRandomInt(this.opponentGuess, this.userNumber)
-      // opp --> user
-
-      // anv har gissat för lågt och opp har gissat för högt
-    } else if (this.opponentGuess > this.botNumber && this.userNumber < this.botNumber) {
-      return this.getRandomInt(this.userNumber, this.opponentGuess)
-      // user --> opp
-
-    } else {
-      // Denna fyller egentligen ingen funktion, men behövs för att alla alternativ ska returnera något
-      return this.opponentGuess;
+    } else if (guess < this.botNumber) {
+      this.min = guess + 1;
+      this.max = this.max;
     }
   }
 
-  // Lägger till ett på föregående motståndares svar om rätt svar är högre och drar av ett om rätt svar är lägre
-  private getThirdOpponentNumber() {
-    if (this.opponentGuess2 > this.botNumber) {
-      return this.opponentGuess2 - 1;
-    } else if (this.opponentGuess2 < this.botNumber) {
-      return this.opponentGuess2 + 1;
+  // Gissar alltid på ett nummer lägre eller ett nummer högre än föregående spelare
+  private getDumbGuess(previousGuess: number) {
+    if (previousGuess > this.botNumber) {
+      return previousGuess - 1;
     } else {
-      // Denna fyller egentligen ingen funktion, men behövs för att alla alternativ ska returnera något
-      return this.opponentGuess2;
+      return previousGuess + 1;
     }
   }
 
   // Spelledarens nummer (rätt svar)
   private getBotNumber() {
-
-    return Math.floor(Math.random() * (20 - 1) + 1);
+    return Math.floor(Math.random() * (this.max - this.min) + this.min);
   }
 
   // Returnerar det numret som användaren skriver i input-fältet
@@ -167,36 +182,53 @@ class GameView {
     return Number(this.inputField.value);
   }
 
-  // Kör funktionerna som genererar nya nummer och skriver ut dessa på sidan
+  // Hämtar användarens gissning 
   private validateUserInput() {
 
-    // Uppdaterar användarens gissning och genererar nya gissningar från motståndarna
     this.userNumber = this.getUserInput();
-    this.opponentGuess = this.getOpponentNumber();
-    this.opponentGuess2 = this.getSecondOpponentNumber();
-    this.opponentGuess3 = this.getThirdOpponentNumber();
+    console.log('User: ' + this.userNumber);
 
-    this.textBox.innerHTML = this.getBotAnswer(this.userNumber)
+    if (this.guessCount > 0) {
+      this.updateMinMax(this.userNumber, this.opponentGuess3)
+    } else {
+      this.updateMinMaxFirstRound(this.userNumber);
+    }
 
-    // Lagt till svar för två nya motståndare
+    this.updateGuessCount()
+    this.getWinner(this.userNumber);
+    console.log('Min: ' + this.min + ', Max: ' + this.max)
+    this.textBox.innerHTML = this.getAnswerForUser(this.userNumber)
+  }
+
+  // Genererar svar för motståndarna
+  private checkOpponentAnswers() {
+
     setTimeout(() => {
-      this.opponentElement.innerHTML = "Opponent 1:" + '<br>' + + String(this.opponentGuess) + '<br>' + this.checkOpponentAnswer(this.opponentGuess);
-      this.opponentWins(this.opponentGuess);
+      this.opponentGuess = this.getRandomInt(this.min, this.max);
+      this.opponentElement.innerHTML = "Opponent 1:" + '<br>' + String(this.opponentGuess) + '<br>' + this.getAnswerForOpponent(this.opponentGuess);
+      this.updateMinMax(this.opponentGuess, this.userNumber)
+      this.getWinner(this.opponentGuess);
+      console.log('Opponent 1: ' + this.opponentGuess)
+      console.log('Min: ' + this.min + ', Max: ' + this.max)
     }, 2000)
 
     setTimeout(() => {
-      this.opponentElement2.innerHTML = "Opponent 2:" + '<br>' + + String(this.opponentGuess2) + '<br>' + this.checkOpponentAnswer(this.opponentGuess2);
-      this.opponentWins(this.opponentGuess2);
+      this.opponentGuess2 = this.getDumbGuess(this.opponentGuess)
+      this.opponentElement2.innerHTML = "Opponent 2:" + '<br>' + String(this.opponentGuess2) + '<br>' + this.getAnswerForOpponent(this.opponentGuess2);
+      this.updateMinMax(this.opponentGuess2, this.opponentGuess)
+      this.getWinner(this.opponentGuess2);
+      console.log('Opponent 2: ' + this.opponentGuess2)
+      console.log('Min: ' + this.min + ', Max: ' + this.max)
     }, 4000);
 
     setTimeout(() => {
-      this.opponentElement3.innerHTML = "Opponent 3:" + '<br>' + String(this.opponentGuess3) + '<br>' + this.checkOpponentAnswer(this.opponentGuess3);
-      this.opponentWins(this.opponentGuess3);
+      this.opponentGuess3 = this.getRandomInt(1, 100);
+      this.opponentElement3.innerHTML = "Opponent 3:" + '<br>' + String(this.opponentGuess3) + '<br>' + this.getAnswerForOpponent(this.opponentGuess3);
+      this.updateMinMax(this.opponentGuess3, this.opponentGuess2)
+      this.getWinner(this.opponentGuess3);
+      console.log('Opponent 3: ' + this.opponentGuess3)
+      console.log('Min: ' + this.min + ', Max: ' + this.max)
     }, 6000);
-
-
-    this.updateGuessCount()
-    this.userWins();
   }
 
   // Ökar antal gissningar med 1
@@ -205,27 +237,17 @@ class GameView {
     this.guessCountElement.innerText = String(this.guessCount);
   }
 
-  // När användaren vinner
-  private userWins() {
-    if (this.userNumber == this.botNumber) {
-      console.log('Grattis User, du vann! Det tog bara ' + this.guessCount + ' gissningar')
-      // gameState.updateView("over");
-    }
-  }
-
-  // När en motståndare vinner
-  private opponentWins(guess: number) {
-
+  // Ändrar gameState när användaren eller motståndaren gissar rätt
+  private getWinner(guess: number) {
     if (guess == this.botNumber) {
-      console.log('Grattis Opponent, du vann!')
-      // gameState.updateView("over");
+      gameState.updateView("over");
     }
   }
 
   // Svaret på användarens gissning
-  private getBotAnswer(number: number) {
-    if (number > 20 || number < 0 || isNaN(number)) {
-      return "Please choose a number between 1-20";
+  private getAnswerForUser(number: number) {
+    if (number > 100 || number < 0 || isNaN(number)) {
+      return "Please choose a number between 1-100";
     } else if (number > this.botNumber) {
       return "User, please guess a lower number!";
     } else if (number < this.botNumber) {
@@ -237,7 +259,7 @@ class GameView {
   }
 
   // Svaret på en motståndares gissning
-  private checkOpponentAnswer(number: number) {
+  private getAnswerForOpponent(number: number) {
     if (number > this.botNumber) {
       return "Please guess a lower number!";
     } else if (number < this.botNumber) {
