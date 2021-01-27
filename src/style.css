@@ -4,7 +4,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  font-family: 'Gaegu', cursive;
+  font-family: "Gaegu", cursive;
 }
 
 .game-wrapper {
@@ -20,7 +20,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column; 
+  flex-direction: column;
 }
 
 /* Margin mellan elementen */
@@ -52,8 +52,8 @@ body {
 
 .name {
   position: absolute;
-  top:10%
-
+  top: 10%;
+}
 /* Test för opponent och textbox */
 
 .opponents {
@@ -82,7 +82,7 @@ span {
 }
 
 input {
-  font-family: 'Gaegu', bold;
+  font-family: "Gaegu", bold;
 }
 
 .view-highscore {
@@ -94,7 +94,7 @@ input {
 }
 
 .logo {
-  background-image:url(/images/logo.png);
+  background-image: url(/images/logo.png);
   background-repeat: no-repeat;
   background-size: cover;
   width: 30vh;
@@ -105,15 +105,13 @@ input {
 }
 
 .present-opponent > span {
-  
   display: flex;
   flex-direction: column;
   justify-items: center;
   align-items: center;
-  padding: .4rem;
-  margin: .2rem;
+  padding: 0.4rem;
+  margin: 0.2rem;
 }
-
 
 /* //Buttons  */
 .all-buttons {
@@ -121,10 +119,10 @@ input {
   margin-top: 0.5rem;
   padding: 0.5rem;
   border-radius: 2rem;
-  font-family: 'Gaegu', bold;
+  font-family: "Gaegu", bold;
   outline: none;
 }
 
 button:hover {
-  transform: scale(1.2) perspective(1px)
+  transform: scale(1.2) perspective(1px);
 }
