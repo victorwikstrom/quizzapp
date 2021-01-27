@@ -2,22 +2,28 @@ class StartView {
   private gameWrapper: HTMLElement;
   private startGameButton: HTMLElement;
   private inputName: HTMLElement;
-  private gameInstructions: HTMLElement;
 
   constructor() {
     this.gameWrapper = document.createElement("div");
     this.gameWrapper.classList.add("game-wrapper", "start-view");
+    
     this.startGameButton = document.createElement("button");
     this.startGameButton.innerHTML = "START GAME";
-    this.gameInstructions = document.createElement("p");
-    this.gameInstructions.innerText = "Guess the correct number before the bot"
+
     this.inputName = document.createElement("input");
-    this.inputName.classList.add ("nameInput")
-    //this.inputName.innerHTML = "Enter your name";
+    this.inputName.classList.add ("nameInput", "name");
+   
+    let gameInstructions = document.createElement("p");
+    gameInstructions.innerText = "Guess the correct number before the bot";
+   
+    let name = document.createElement("p");
+    name.innerHTML = "Name";
 
     this.gameWrapper.appendChild(this.startGameButton);
-    this.gameWrapper.appendChild(this.gameInstructions);
+    this.gameWrapper.appendChild(gameInstructions);
     this.gameWrapper.appendChild(this.inputName);
+    this.gameWrapper.appendChild(name);
+
     document.body.appendChild(this.gameWrapper);
   }
 

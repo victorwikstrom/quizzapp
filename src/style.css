@@ -37,3 +37,8 @@ body {
   border: none;
   padding: 10px 20px;
 }
+
+.name {
+  position: absolute;
+  top:10%
+}
