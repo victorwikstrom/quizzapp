@@ -4,24 +4,36 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  font-family: 'Gaegu', cursive;
 }
 
 .game-wrapper {
   height: 80vh;
   width: 50vw;
+  background-color: rgb(178, 197, 250);
 
-  border: 2px solid black;
+  border: 5px solid rgb(203, 243, 210);
+  border-radius: 0.5rem;
 
   position: relative;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: column; 
+}
+
+/* Margin mellan elementen */
+.game-wrapper > * {
+  margin-bottom: 1rem;
 }
 
 .start-view {
-  background-color: red;
+  background-color: rgb(178, 197, 250);
+}
+
+.over-view {
+  background-color: rgb(178, 197, 250);
 }
 
 .guess-counter {
@@ -41,4 +53,78 @@ body {
 .name {
   position: absolute;
   top:10%
+
+/* Test för opponent och textbox */
+
+.opponents {
+  display: flex;
+  flex-direction: row;
+  margin-left: 1rem;
+}
+
+.opponent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-right: 1rem;
+  padding: 1rem;
+}
+
+.textBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+span {
+  padding: 1rem;
+}
+
+input {
+  font-family: 'Gaegu', bold;
+}
+
+.view-highscore {
+  text-align: center;
+  background-color: #ffcea8;
+  padding-top: 0.1rem;
+  border-radius: 1rem;
+  width: 10rem;
+}
+
+.logo {
+  background-image:url(/images/logo.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 30vh;
+  height: 30vh;
+}
+.present-opponent {
+  display: flex;
+}
+
+.present-opponent > span {
+  
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  padding: .4rem;
+  margin: .2rem;
+}
+
+
+/* //Buttons  */
+.all-buttons {
+  border: 0.1rem solid black;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 2rem;
+  font-family: 'Gaegu', bold;
+  outline: none;
+}
+
+button:hover {
+  transform: scale(1.2) perspective(1px)
 }

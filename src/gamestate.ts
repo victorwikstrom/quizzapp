@@ -13,13 +13,13 @@ class GameState {
 
   public runGame() {
     if (this.currentView === "start") {
-      this.startView.show();
+      this.startView.run();
     }
     if (this.currentView === "game") {
-      this.gameView.show();
+      this.gameView.run();
     }
     if (this.currentView === "over") {
-      this.gameOverView.show();
+      this.gameOverView.run();
     }
   }
 
@@ -28,16 +28,14 @@ class GameState {
 
     if (this.currentView === "start") {
       this.gameOverView.hide();
-      this.gameView.hide();
-      this.startView.show();
+      this.startView.run();
     } else if (this.currentView === "game") {
-      this.gameOverView.hide();
       this.startView.hide();
-      this.gameView.show();
+      this.gameView.run();
     } else if (this.currentView === "over") {
       this.gameView.hide();
-      this.startView.hide();
-      this.gameOverView.show();
+      this.gameOverView.run();
+      
     }
   }
 }
