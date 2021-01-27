@@ -1,46 +1,49 @@
 class Opponent {
-  private wrapper: HTMLElement; 
-  private yPos: number;
+  public wrapper: HTMLElement;
+  public name: string;
+  public personality: string;
+  public guess: number;
+
   private imageSrc: string;
 
-  private personality: string;
 
-  public min: number
-  public max: number;
+  constructor(name: string, personality: "dumb" | "smart" | "random", imageSrc: string) {
+    this.wrapper = document.createElement("div");
+    this.wrapper.classList.add("opponent")
+    this.imageSrc = imageSrc;
+    this.name = name;
+    this.personality = personality
+    this.guess = 0
 
+  }
 
+  public getDumbGuess(previousGuess: number, correctNumber: number) {
+    if (previousGuess > correctNumber) {
+      this.guess = previousGuess - 1;
+    } else {
+      this.guess = previousGuess + 1;
+    }
+    this.printGuess(2000)
+  }
 
-constructor(personality: string, yPos: number, imageSrc: string) {
-  this.wrapper = document.createElement("div");
-  this.yPos = yPos;
-  this.imageSrc = imageSrc;
-  this.min = 0;
-  this.max = 20;
-  this.personality = personality
-}
+  public getRandomGuess() {
+    const min = Math.ceil(1);
+    const max = Math.floor(100);
+    this.guess = Math.floor(Math.random() * (max - min) + min);
+    this.printGuess(4000)
+  }
 
-public getSmartGuess(min: number, max: number) {
+  public getSmartGuess(min: number, max: number) {
     min = Math.ceil(min);
     max = Math.floor(max);
-    const guess = Math.floor(Math.random() * (max - min) + min);
-    this.printGuess(guess)
-}
-
-public getDumbGuess(prevGuess: number, prevBotAnswer: string) {
-  if (prevBotAnswer === "lower") {
-    this.printGuess(prevGuess - 1)
-  } else if (prevBotAnswer === "higher") {
-    this.printGuess(prevGuess + 1)
+    this.guess = Math.floor(Math.random() * (max - min) + min);
+    this.printGuess(6000)
   }
-}
 
-public getRandomGuess() {
-    const guess = Math.floor(Math.random() * (20 - 1) + 1);
-    this.printGuess(guess)
-}
-
-public printGuess(guess: number) {
-  // skriv ut gissningen i gameWrapper
-}
+  public printGuess(timeout: number) {
+    setTimeout(() => {
+      this.wrapper.innerHTML = this.name + " " + "<br>" + String(this.guess)
+    }, timeout)
+  }
 
 }
