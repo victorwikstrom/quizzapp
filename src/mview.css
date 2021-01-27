@@ -1,0 +1,7 @@
+@media (max-width: 600px){
+
+.game-wrapper {
+    height: max-content;
+    width: max-content;
+}    
+}
