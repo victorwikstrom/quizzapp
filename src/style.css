@@ -8,7 +8,7 @@ body {
 }
 
 .game-wrapper {
-  height: 80vh;
+  height: 100vh;
   width: 50vw;
   background-color: rgb(178, 197, 250);
 
@@ -43,17 +43,10 @@ body {
 }
 
 .nameInput {
-  position: absolute;
-  top: 20%;
-  left: 30%;
   border: none;
   padding: 10px 20px;
 }
 
-.name {
-  position: absolute;
-  top: 10%;
-}
 /* Test för opponent och textbox */
 
 .opponents {

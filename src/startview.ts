@@ -1,7 +1,7 @@
 class StartView {
   private gameWrapper: HTMLElement;
   private startGameButton: HTMLElement;
-  private inputName: HTMLElement;
+  private inputName: HTMLInputElement;
   private presentOpponent: HTMLElement;
   private presentOpponent1: HTMLElement;
   private presentOpponent2: HTMLElement;
@@ -57,10 +57,12 @@ class StartView {
     let name = document.createElement("p");
     name.innerHTML = "Name";
 
-    this.gameWrapper.appendChild(this.startGameButton);
+    
+
     this.gameWrapper.appendChild(gameInstructions);
-    this.gameWrapper.appendChild(this.inputName);
     this.gameWrapper.appendChild(name);
+    this.gameWrapper.appendChild(this.inputName);
+    this.gameWrapper.appendChild(this.startGameButton);
 
     document.body.appendChild(this.gameWrapper);
   }
@@ -73,8 +75,9 @@ class StartView {
 
     document.body.appendChild(this.gameWrapper);
     this.startGameButton.addEventListener("click", () => {
+      gameState.playerName = this.inputName.value;
       gameState.updateView("game");
-
+      //console.log(gameState.playerName);
     });
     
     
