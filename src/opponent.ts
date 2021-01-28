@@ -1,5 +1,7 @@
 class Opponent {
   public wrapper: HTMLElement;
+  public textElement: HTMLElement;
+  public image: HTMLImageElement;
   public name: string;
   public personality: string;
   public guess: number;
@@ -12,11 +14,19 @@ class Opponent {
     imageSrc: string
   ) {
     this.wrapper = document.createElement("div");
+    this.image = document.createElement("img")
+    this.textElement = document.createElement("p")
+
     this.wrapper.classList.add("opponent");
+    
     this.imageSrc = imageSrc;
+    this.image.src = this.imageSrc
+    this.image.classList.add("opponent-image")
     this.name = name;
     this.personality = personality;
     this.guess = 0;
+
+    this.wrapper.appendChild(this.image)
   }
 
   public getDumbGuess(previousGuess: number, correctNumber: number) {
@@ -43,6 +53,7 @@ class Opponent {
   }
 
   public printGuess() {
-    this.wrapper.innerHTML = this.name + " " + "<br>" + String(this.guess);
+    this.textElement.innerHTML = this.name + " " + "<br>" + String(this.guess);
+    this.wrapper.appendChild(this.textElement)
   }
 }
