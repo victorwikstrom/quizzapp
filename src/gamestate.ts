@@ -3,7 +3,7 @@ class GameState {
   startView: StartView;
   gameView: GameView;
   gameOverView: GameOverView;
-  playerName: String;
+  playerName: string;
 
   constructor() {
     this.currentView = "start";
