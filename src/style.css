@@ -8,7 +8,7 @@ body {
 }
 
 .game-wrapper {
-  height: 80vh;
+  height: 100vh;
   width: 50vw;
   background-color: rgb(178, 197, 250);
 
@@ -43,16 +43,24 @@ body {
 }
 
 .nameInput {
-  position: absolute;
-  top: 20%;
-  left: 30%;
-  border: none;
-  padding: 10px 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  top: 96%;
+  right: 3%;
 }
 
 .name {
-  position: absolute;
-  top: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gameInstructions {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  
 }
 /* Test för opponent och textbox */
 
@@ -63,6 +71,11 @@ body {
 }
 
 .opponent {
+  width: 100;
+  height: 100;
+  border-radius: 50%;
+  background-color: red;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -125,4 +138,37 @@ input {
 
 button:hover {
   transform: scale(1.2) perspective(1px);
+}
+
+.leader {
+  position: absolute;
+  right: 0%;
+  top: auto;
+  bottom: auto;
+
+  width: 25%;
+}
+
+.leader-response {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  position: absolute;
+  right: 25%;
+  top: auto;
+  bottom: auto;
+
+  max-width: 10%;
+
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 20px;
+}
+
+.hidden {
+  display: none;
 }

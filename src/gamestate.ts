@@ -3,12 +3,14 @@ class GameState {
   startView: StartView;
   gameView: GameView;
   gameOverView: GameOverView;
+  playerName: String;
 
   constructor() {
     this.currentView = "start";
     this.startView = new StartView();
     this.gameView = new GameView();
     this.gameOverView = new GameOverView();
+    this.playerName = "";
   }
 
   public runGame() {
