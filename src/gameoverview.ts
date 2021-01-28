@@ -88,6 +88,7 @@ class GameOverView {
       shouldSwitch: boolean;
 
       switching = true;
+      shouldSwitch = false;
 
       while (switching) {
         switching = false;
