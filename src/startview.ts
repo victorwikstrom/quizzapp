@@ -49,15 +49,15 @@ class StartView {
     this.startGameButton.innerHTML = "START GAME";
 
     this.inputName = document.createElement("input");
-    this.inputName.classList.add ("nameInput", "name");
+    this.inputName.classList.add ("nameInput");
    
     let gameInstructions = document.createElement("p");
-    gameInstructions.innerText = "Guess the correct number before the bot";
+    gameInstructions.classList.add("gameInstructions");
+    gameInstructions.innerText = "Guess the correct number before your opponents!";
    
     let name = document.createElement("p");
-    name.innerHTML = "Name";
-
-    
+    name.classList.add("name");
+    name.innerHTML = "Enter your name:";
 
     this.gameWrapper.appendChild(gameInstructions);
     this.gameWrapper.appendChild(name);
