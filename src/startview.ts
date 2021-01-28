@@ -77,7 +77,6 @@ class StartView {
     this.startGameButton.addEventListener("click", () => {
       gameState.playerName = this.inputName.value;
       gameState.updateView("game");
-      //console.log(gameState.playerName);
     });
     
     
