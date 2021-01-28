@@ -75,11 +75,13 @@ class StartView {
 
     document.body.appendChild(this.gameWrapper);
     this.startGameButton.addEventListener("click", () => {
+
       gameState.playerName = this.inputName.value;
+      localStorage.setItem('name', gameState.playerName)
+
       gameState.updateView("game");
+
     });
-    
-    
   }
 
   public hide() {

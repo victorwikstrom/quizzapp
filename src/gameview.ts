@@ -328,8 +328,36 @@ class GameView {
     } else if (number < this.correctNumber) {
       return "User, please guess a higher number!";
     } else {
+      this.updateLocalStorage();
       gameState.updateView("over");
       return "User, you are correct!";
     }
   }
+
+  private updateLocalStorage() {
+
+    let players = JSON.parse(localStorage.getItem('highscore'));
+    
+    let player = localStorage.getItem('name');
+    console.log(player);
+
+    let score = this.guessCount;
+
+    let playerObject = {
+      player: player,
+      score: score
+    }
+
+    if (players == null) {
+      players = [playerObject];
+    } else {
+      players.push(playerObject);
+    }
+
+    console.log(players)
+
+    localStorage.setItem('score', JSON.stringify(playerObject))
+    localStorage.setItem('highscore', JSON.stringify(players))
+  }
+
 }

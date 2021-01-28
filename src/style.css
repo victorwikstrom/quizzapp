@@ -103,7 +103,32 @@ input {
   background-color: #ffcea8;
   padding-top: 0.1rem;
   border-radius: 1rem;
-  width: 10rem;
+  padding: 1rem;
+  width: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+}
+
+table {
+  text-align: center;
+  padding: .2rem;
+  background-color: rgb(203, 243, 210);
+}
+
+table tr:nth-child(odd){
+  background-color: rgb(178, 197, 250);
+}
+
+.logo {
+  background-image: url(/images/logo.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 30vh;
+  height: 30vh;
 }
 
 .logo {
