@@ -336,14 +336,14 @@ class GameView {
 
   private updateLocalStorage() {
 
-    let players = JSON.parse(localStorage.getItem('highscore'));
+    let players: Array<object> = JSON.parse(localStorage.getItem('highscore'));
     
-    let player = localStorage.getItem('name');
+    let player: string | null = localStorage.getItem('name');
     console.log(player);
 
-    let score = this.guessCount;
+    let score: number = this.guessCount;
 
-    let playerObject = {
+    let playerObject: object = {
       player: player,
       score: score
     }
