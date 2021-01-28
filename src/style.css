@@ -131,3 +131,36 @@ input {
 button:hover {
   transform: scale(1.2) perspective(1px);
 }
+
+.leader {
+  position: absolute;
+  right: 0%;
+  top: auto;
+  bottom: auto;
+
+  width: 25%;
+}
+
+.leader-response {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  position: absolute;
+  right: 25%;
+  top: auto;
+  bottom: auto;
+
+  max-width: 10%;
+
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 20px;
+}
+
+.hidden {
+  display: none;
+}
