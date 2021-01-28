@@ -46,9 +46,9 @@ class GameView {
     this.guessButton.innerHTML = "Gissa";
 
     this.opponents = [
-      new Opponent("Mr Dumb", "dumb", "imgsrc"),
-      new Opponent("Mr Random", "random", "imgsrc"),
-      new Opponent("Mr Smart", "smart", "imgsrc"),
+      new Opponent("Mr Dumb", "dumb", "/images/stickman-1.png"),
+      new Opponent("Mr Random", "random", "/images/stickman-3.png"),
+      new Opponent("Mr Smart", "smart", "/images/stickman-2.png"),
     ];
 
     this.leader = new Leader();
