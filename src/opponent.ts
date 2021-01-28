@@ -43,4 +43,10 @@ public printGuess(guess: number) {
   // skriv ut gissningen i gameWrapper
 }
 
+public setCharacterImages(_imageSrc: string) {
+  import character1 from 'img src/images/stickman-1.png\';
+  import character2 from 'img src/images/stickman-2.png\';
+  import character3 from 'img src/images/stickman-3.png\';
+  
+}
 }
