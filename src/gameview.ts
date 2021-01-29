@@ -210,7 +210,7 @@ class GameView {
       this.updateLocalStorage();
     }
 
-    const response = this.leader.getResponse(this.userNumber, 'User');
+    const response = this.leader.getResponse(this.userNumber, String(localStorage.getItem('name')));
     this.printLeaderResponse(response);
     this.updateMinMax2(this.userNumber);
     console.log(this.min, this.max)
@@ -221,7 +221,7 @@ class GameView {
     winnerText.classList.add("winner-text");
     winnerText.innerHTML = opponentName + ", you are the winner!";
     this.gameWrapper.appendChild(winnerText);
-    
+
     setTimeout(() => {
       gameState.updateView("over");
     }, 1500);
