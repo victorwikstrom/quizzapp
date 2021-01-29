@@ -35,21 +35,30 @@ class Opponent {
     } else {
       this.guess = previousGuess + 1;
     }
-    this.printGuess();
+
+    setTimeout(() => {
+      this.printGuess();
+    }, 0);
+
+    
   }
 
   public getRandomGuess() {
     const min = Math.ceil(1);
     const max = Math.floor(100);
     this.guess = Math.floor(Math.random() * (max - min) + min);
-    this.printGuess();
+    setTimeout(() => {
+      this.printGuess();
+    }, 0);
   }
 
   public getSmartGuess(min: number, max: number) {
     min = Math.ceil(min);
     max = Math.floor(max);
     this.guess = Math.floor(Math.random() * (max - min) + min);
-    this.printGuess();
+    setTimeout(() => {
+      this.printGuess();
+    }, 0);
   }
 
   public printGuess() {

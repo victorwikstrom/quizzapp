@@ -128,15 +128,9 @@ class GameView {
   */
 
   private updateMinMax2(guess: number) {
-    if (
-      (this.leaderResponse === "higher" && guess > this.min) ||
-      guess === this.min
-    ) {
+    if (this.leader.response === "higher" && guess >= this.min) {
       this.min = guess + 1;
-    } else if (
-      (this.leaderResponse === "lower" && guess < this.max) ||
-      guess === this.max
-    ) {
+    } else if (this.leader.response === "lower" && guess <= this.max) {
       this.max = guess - 1;
     } else {
       return;
@@ -209,12 +203,17 @@ class GameView {
     this.updateGuessCount();
 
     this.userNumber = this.getUserInput();
-    this.textBox.innerHTML = this.getAnswerForUser(this.userNumber);
+    
 
     if (this.userNumber === this.correctNumber) {
-      this.printWinnerMessage("playerName");
+      this.printWinnerMessage(String(localStorage.getItem('name')));
+      this.updateLocalStorage();
     }
+
+    const response = this.leader.getResponse(this.userNumber, String(localStorage.getItem('name')));
+    this.printLeaderResponse(response);
     this.updateMinMax2(this.userNumber);
+    console.log(this.min, this.max)
   }
 
   private printWinnerMessage(opponentName: string) {
@@ -222,13 +221,15 @@ class GameView {
     winnerText.classList.add("winner-text");
     winnerText.innerHTML = opponentName + ", you are the winner!";
     this.gameWrapper.appendChild(winnerText);
+
     setTimeout(() => {
       gameState.updateView("over");
-    }, 3000);
+    }, 1500);
   }
 
   private getOpponentAnswers() {
     for (const op of this.opponents) {
+      
       this.printOpponentAnwers(op);
     }
   }
@@ -236,40 +237,53 @@ class GameView {
   // Genererar svar för motståndarna
   private printOpponentAnwers(op: Opponent) {
     if (op.personality === "dumb") {
-      op.getDumbGuess(this.userNumber, this.correctNumber);
-      const response = this.leader.getResponse(op.guess, op.name);
-      this.printLeaderResponse(response);
+      
+      setTimeout(() => {
+        op.getDumbGuess(this.userNumber, this.correctNumber);
+        const response = this.leader.getResponse(op.guess, op.name);
+        this.printLeaderResponse(response);
+        this.updateMinMax2(op.guess);
+        console.log(this.min, this.max)
+      }, 2000);
 
       if (op.guess === this.correctNumber) {
         setTimeout(() => {
           this.printWinnerMessage(op.name);
         }, 2000);
       }
-      this.updateMinMax2(op.guess);
+      
     } else if (op.personality === "random") {
-      op.getRandomGuess();
-
-      const response = this.leader.getResponse(op.guess, op.name);
-      this.printLeaderResponse(response);
+      
+      setTimeout(() => {
+        op.getRandomGuess();
+        const response = this.leader.getResponse(op.guess, op.name);
+        this.printLeaderResponse(response);
+        this.updateMinMax2(op.guess);
+        console.log(this.min, this.max)
+      }, 4000);
 
       if (op.guess === this.correctNumber) {
         setTimeout(() => {
           this.printWinnerMessage(op.name);
-        }, 2000);
+        }, 4000);
       }
-      this.updateMinMax2(op.guess);
+      
     } else {
-      op.getSmartGuess(this.min, this.max);
-
-      const response = this.leader.getResponse(op.guess, op.name);
-      this.printLeaderResponse(response);
+      
+      setTimeout(() => {
+        op.getSmartGuess(this.min, this.max);
+        const response = this.leader.getResponse(op.guess, op.name);
+        this.printLeaderResponse(response);
+        this.updateMinMax2(op.guess);
+        console.log(this.min, this.max)
+      }, 6000);
 
       if (op.guess === this.correctNumber) {
         setTimeout(() => {
           this.printWinnerMessage(op.name);
-        }, 2000);
+        }, 6000);
       }
-      this.updateMinMax2(op.guess);
+      
     }
   }
 
@@ -309,7 +323,7 @@ class GameView {
     this.guessCountElement.innerText = String(this.guessCount);
   }
   private printLeaderResponse(response: string) {
-    if (this.leader.responseWrapper.childNodes.length === 3) {
+    if (this.leader.responseWrapper.childNodes.length === 4) {
       this.leader.responseWrapper.innerHTML = "";
     }
     const responseElem = document.createElement("p");
@@ -336,14 +350,14 @@ class GameView {
 
   private updateLocalStorage() {
 
-    let players = JSON.parse(localStorage.getItem('highscore'));
+    let players: Array<object> = JSON.parse(localStorage.getItem('highscore'));
     
-    let player = localStorage.getItem('name');
+    let player: string | null = localStorage.getItem('name');
     console.log(player);
 
-    let score = this.guessCount;
+    let score: number = this.guessCount;
 
-    let playerObject = {
+    let playerObject: object = {
       player: player,
       score: score
     }
