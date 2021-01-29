@@ -221,6 +221,7 @@ class GameView {
     winnerText.classList.add("winner-text");
     winnerText.innerHTML = opponentName + ", you are the winner!";
     this.gameWrapper.appendChild(winnerText);
+    
     setTimeout(() => {
       gameState.updateView("over");
     }, 1500);
