@@ -11,7 +11,7 @@ class GameState {
   pauseButton: HTMLElement;
 
   soundBar: HTMLElement;
-  
+  logoImage: HTMLImageElement;
 
   constructor() {
     this.currentView = "start";
@@ -20,8 +20,11 @@ class GameState {
     this.gameOverView = new GameOverView();
     this.playerName = "";
 
+    this.logoImage = document.createElement("img");
+    this.logoImage.src = "./images/logo.png";
+
     this.soundBar = document.createElement("div");
-    this.soundBar.innerHTML = "Music:"
+    this.soundBar.innerHTML = "Music:";
     this.soundBar.classList.add("sound-bar");
 
     this.playButton = document.createElement("button");
@@ -36,20 +39,16 @@ class GameState {
     this.soundBar.appendChild(this.playButton);
     this.soundBar.appendChild(this.pauseButton);
 
-
     this.playButton.addEventListener("click", () => {
       this.backgroundMusic.play();
-
     });
 
     this.pauseButton.addEventListener("click", () => {
       this.backgroundMusic.pause();
     });
-
   }
 
   public runGame() {
-
     if (this.currentView === "start") {
       this.startView.run();
     }
@@ -62,7 +61,6 @@ class GameState {
   }
 
   public updateView(view: "start" | "game" | "over") {
-
     this.currentView = view;
 
     if (this.currentView === "start") {
@@ -74,7 +72,6 @@ class GameState {
     } else if (this.currentView === "over") {
       this.gameView.hide();
       this.gameOverView.run();
-      
     }
   }
 }

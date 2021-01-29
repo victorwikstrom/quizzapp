@@ -7,8 +7,13 @@ body {
   font-family: "Gaegu", cursive;
 }
 
+input:focus,
+button:focus {
+  outline: none;
+}
+
 .game-wrapper {
-  height: 100vh;
+  height: 99vh;
   width: 60vw;
   background-color: rgb(178, 197, 250);
 
@@ -38,8 +43,8 @@ body {
 
 .guess-counter {
   position: absolute;
-  top: 5%;
-  left: 5%;
+  top: 20%;
+  left: 9%;
 }
 
 .nameInput {
@@ -60,33 +65,32 @@ body {
   display: flex;
   justify-content: center;
   align-content: center;
-  
 }
 /* Test för opponent och textbox */
 
 .opponents {
   display: flex;
-  flex-direction: row;
-  margin-left: 1rem;
+  flex-direction: column;
 }
 
 .opponent {
-  width: 100;
+  min-width: 250px;
   height: 100;
 
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-right: 1rem;
-  padding: 1rem;
+  margin-left: -35%;
+  margin-bottom: 20px;
 }
 
 .opponent-image {
   height: 100px;
   width: auto;
-} 
+  margin-right: 10px;
+}
 
 .textBox {
   display: flex;
@@ -100,6 +104,10 @@ span {
 
 input {
   font-family: "Gaegu", bold;
+  font-size: 1rem;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px 10px;
 }
 
 .view-highscore {
@@ -114,42 +122,40 @@ input {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
 }
 
 table {
   text-align: center;
-  padding: .2rem;
+  padding: 0.2rem;
   background-color: rgb(203, 243, 210);
 }
 
-table tr:nth-child(odd){
+table tr:nth-child(odd) {
   background-color: rgb(178, 197, 250);
 }
 
-.logo {
-  background-image: url(/images/logo.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 30vh;
-  height: 30vh;
+.logo-img-start {
+  width: 15vw;
+  height: auto;
 }
 
-.logo {
-  background-image: url(/images/logo.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 30vh;
-  height: 30vh;
+.logo-img-absolute {
+  width: 8vw;
+  height: auto;
+  position: absolute;
+  left: 5%;
+  top: 5%;
 }
+
 .present-opponent {
   display: flex;
+  width: 100%;
 }
 
 .present-opponent > span {
   display: flex;
   flex-direction: column;
-  justify-items: center;
+  justify-items: let;
   align-items: center;
   padding: 0.4rem;
   margin: 0.2rem;
@@ -186,12 +192,21 @@ button:hover {
 }
 
 .leader {
+  margin-right: -5%;
   position: absolute;
   right: 0%;
   top: auto;
   bottom: auto;
 
   width: 25%;
+}
+
+.response-bubble {
+  background-color: white;
+  border: 2px solid black;
+  padding: 5px 2px;
+  margin-bottom: 20px;
+  border-radius: 20px;
 }
 
 .leader-response {
@@ -203,15 +218,13 @@ button:hover {
   text-align: center;
 
   position: absolute;
-  right: 25%;
+  right: 20%;
   top: auto;
   bottom: auto;
 
-  max-width: 10%;
+  margin-bottom: -5%;
 
-  background-color: white;
-  border: 2px solid black;
-  border-radius: 20px;
+  max-width: 20%;
 }
 
 .hidden {
