@@ -32,6 +32,8 @@ class GameOverView {
   }
 
   public run() {
+    this.gameWrapper.appendChild(gameState.soundBar);
+
     //Sends player back to startview
     this.getLocalStorage();
     document.body.appendChild(this.gameWrapper);

@@ -5,15 +5,51 @@ class GameState {
   gameOverView: GameOverView;
   playerName: string;
 
+  // gameWrapper: HTMLElement;
+  backgroundMusic: HTMLAudioElement;
+  playButton: HTMLElement;
+  pauseButton: HTMLElement;
+
+  soundBar: HTMLElement;
+  
+
   constructor() {
     this.currentView = "start";
     this.startView = new StartView();
     this.gameView = new GameView();
     this.gameOverView = new GameOverView();
     this.playerName = "";
+
+    this.soundBar = document.createElement("div");
+    this.soundBar.innerHTML = "Music:"
+    this.soundBar.classList.add("sound-bar");
+
+    this.playButton = document.createElement("button");
+    this.playButton.innerHTML = "On";
+    this.playButton.classList.add("sound-buttons");
+    this.backgroundMusic = new Audio("./Music/takeonme.mp3");
+
+    this.pauseButton = document.createElement("button");
+    this.pauseButton.innerHTML = "Off";
+    this.pauseButton.classList.add("sound-buttons");
+
+    this.soundBar.appendChild(this.playButton);
+    this.soundBar.appendChild(this.pauseButton);
+
+
+    this.playButton.addEventListener("click", () => {
+      this.backgroundMusic.play();
+
+    });
+
+    this.pauseButton.addEventListener("click", () => {
+      this.backgroundMusic.pause();
+    });
+
   }
 
   public runGame() {
+
     if (this.currentView === "start") {
       this.startView.run();
     }
@@ -26,6 +62,7 @@ class GameState {
   }
 
   public updateView(view: "start" | "game" | "over") {
+
     this.currentView = view;
 
     if (this.currentView === "start") {

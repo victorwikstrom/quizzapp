@@ -169,6 +169,22 @@ button:hover {
   transform: scale(1.2) perspective(1px);
 }
 
+.sound-bar {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  border: none;
+}
+
+.sound-buttons {
+  padding: 0.5rem;
+  border: solid 0.1rem;
+  border-radius: 2rem;
+  margin-left: 0.2rem;
+  font-family: "Gaegu", bold;
+  outline: none;
+}
+
 .leader {
   position: absolute;
   right: 0%;

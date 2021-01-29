@@ -97,6 +97,9 @@ class GameView {
   }
 
   public run() {
+    this.gameWrapper.appendChild(gameState.soundBar);
+
+    
     document.body.appendChild(this.gameWrapper);
     console.log(this.correctNumber);
     this.guessButton.addEventListener("click", () => {

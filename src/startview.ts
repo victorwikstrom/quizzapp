@@ -72,6 +72,7 @@ class StartView {
   // }
 
   public run() {
+    this.gameWrapper.appendChild(gameState.soundBar);
 
     document.body.appendChild(this.gameWrapper);
     this.startGameButton.addEventListener("click", () => {
