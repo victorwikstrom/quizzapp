@@ -30,7 +30,7 @@ class GameView {
   private min: number;
   private max: number;
 
-  private leaderResponse: string;
+  // private leaderResponse: string;
 
   constructor() {
     this.gameWrapper = document.createElement("div");
@@ -87,7 +87,7 @@ class GameView {
     this.opponentGuess3 = this.getRandomInt(this.min, this.max);
     */
 
-    this.leaderResponse = "";
+    // this.leaderResponse = "";
 
     this.gameWrapper.appendChild(this.textBox);
     this.gameWrapper.appendChild(this.inputField);
@@ -97,6 +97,9 @@ class GameView {
   }
 
   public run() {
+    this.gameWrapper.appendChild(gameState.soundBar);
+
+    
     document.body.appendChild(this.gameWrapper);
     console.log(this.correctNumber);
     this.guessButton.addEventListener("click", () => {
@@ -334,19 +337,19 @@ class GameView {
   }
 
   // Svaret på användarens gissning
-  private getAnswerForUser(number: number) {
-    if (number > 100 || number < 0 || isNaN(number)) {
-      return "Please choose a number between 1-100";
-    } else if (number > this.correctNumber) {
-      return "User, please guess a lower number!";
-    } else if (number < this.correctNumber) {
-      return "User, please guess a higher number!";
-    } else {
-      this.updateLocalStorage();
-      gameState.updateView("over");
-      return "User, you are correct!";
-    }
-  }
+  // private getAnswerForUser(number: number) {
+  //   if (number > 100 || number < 0 || isNaN(number)) {
+  //     return "Please choose a number between 1-100";
+  //   } else if (number > this.correctNumber) {
+  //     return "User, please guess a lower number!";
+  //   } else if (number < this.correctNumber) {
+  //     return "User, please guess a higher number!";
+  //   } else {
+  //     this.updateLocalStorage();
+  //     gameState.updateView("over");
+  //     return "User, you are correct!";
+  //   }
+  // }
 
   private updateLocalStorage() {
 
