@@ -82,15 +82,25 @@ class GameOverView {
 
       highScoreTable.appendChild(tr);
 
-      let rows, switching, i, x, y, shouldSwitch;
+      let rows: any, 
+      switching: boolean, 
+      i: number, 
+      x: HTMLTableElement, 
+      y: HTMLTableElement, 
+      shouldSwitch: boolean;
+
       switching = true;
+      shouldSwitch = false;
+
       while (switching) {
         switching = false;
         rows = highScoreTable.rows;
+
         for (i = 1; i < (rows.length - 1); i++) {
           shouldSwitch = false;
           x = rows[i].getElementsByTagName("TD")[1];
           y = rows[i + 1].getElementsByTagName("TD")[1];
+
           if (Number(x.innerHTML) > Number(y.innerHTML)) {
             shouldSwitch = true;
             break;
