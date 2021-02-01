@@ -1,6 +1,4 @@
 class GameOverView {
-  currentView: "over";
-
   private gameWrapper: HTMLElement;
   private restartGame: HTMLElement;
   private highScore: HTMLElement;
@@ -23,14 +21,12 @@ class GameOverView {
     this.gameWrapper.appendChild(this.highScore);
 
     this.gameWrapper.appendChild(this.restartGame);
-
-    this.currentView = "over";
   }
 
   public run() {
     this.gameWrapper.appendChild(gameState.soundBar);
-    //this.gameWrapper.appendChild(gameState.logoImage);
-    // gameState.logoImage.classList.add("logo-img-absolute");
+    this.gameWrapper.appendChild(gameState.logoImage);
+    gameState.logoImage.classList.add("logo-img-absolute");
 
     //Sends player back to startview
     this.getLocalStorage();

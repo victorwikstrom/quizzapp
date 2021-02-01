@@ -14,6 +14,7 @@ class GameView {
   private opponentWrapper: HTMLElement;
 
   private leader: Leader;
+  private countDown: number;
 
   /*
   private opponentElement: HTMLElement;
@@ -89,6 +90,9 @@ class GameView {
 
     // this.leaderResponse = "";
 
+    this.countDown = 10;
+
+    // APPENDS
     this.gameWrapper.appendChild(this.textBox);
     this.gameWrapper.appendChild(this.inputField);
     this.gameWrapper.appendChild(this.guessButton);
@@ -98,8 +102,8 @@ class GameView {
 
   public run() {
     this.gameWrapper.appendChild(gameState.soundBar);
-    //this.gameWrapper.appendChild(gameState.logoImage);
-    //gameState.logoImage.classList.add("logo-img-absolute");
+    this.gameWrapper.appendChild(gameState.logoImage);
+    gameState.logoImage.classList.add("logo-img-absolute");
 
     document.body.appendChild(this.gameWrapper);
     console.log(this.correctNumber);
@@ -115,6 +119,7 @@ class GameView {
 
       this.printUserAnswer();
       this.getOpponentAnswers();
+      // this.startTimer(10);
     });
   }
 
@@ -138,6 +143,27 @@ class GameView {
       this.max = guess - 1;
     } else {
       return;
+    }
+  }
+
+  private startTimer(start: number) {
+    this.countDown = start;
+    let s = start;
+    let ms = 0;
+    setInterval(() => {
+      if (ms === 0 || s === 0) {
+        ms = 99;
+        s -= 1;
+      }
+      if (ms === 0 && s === 0) {
+        this.countDown = 0;
+      }
+      ms -= 1;
+      console.log(s + ":" + ms);
+    }, 100);
+    if (this.countDown === 0) {
+      s = 0;
+      ms = 0;
     }
   }
 
