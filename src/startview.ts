@@ -62,10 +62,10 @@ class StartView {
   // }
 
   public run() {
-    gameState.logoImage.classList.add("logo-img-start");
+    //gameState.logoImage.classList.add("logo-img-start");
 
     this.gameWrapper.appendChild(gameState.soundBar);
-    this.gameWrapper.appendChild(gameState.logoImage);
+    //this.gameWrapper.appendChild(gameState.logoImage);
     this.gameWrapper.appendChild(this.presentOpponent);
     this.presentOpponent.appendChild(this.presentOpponent1);
     this.presentOpponent.appendChild(this.presentOpponent2);
