@@ -14,8 +14,11 @@ class GameState {
   logoImage: HTMLImageElement;
 
   constructor() {
-    this.logoImage = document.createElement("img");
-    this.logoImage.src = "./images/logo.png";
+    this.currentView = "start";
+    this.startView = new StartView();
+    this.gameView = new GameView();
+    this.gameOverView = new GameOverView();
+    this.playerName = "";
 
     this.soundBar = document.createElement("div");
     this.soundBar.innerHTML = "Music:";
@@ -33,11 +36,8 @@ class GameState {
     this.soundBar.appendChild(this.playButton);
     this.soundBar.appendChild(this.pauseButton);
 
-    this.currentView = "start";
-    this.startView = new StartView();
-    this.gameView = new GameView();
-    this.gameOverView = new GameOverView();
-    this.playerName = "";
+    this.logoImage = document.createElement("img");
+    this.logoImage.src = "./images/logo.png";
 
     this.playButton.addEventListener("click", () => {
       this.backgroundMusic.play();
