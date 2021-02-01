@@ -49,15 +49,17 @@ class GameState {
   }
 
   public runGame() {
-    if (this.currentView === "start") {
-      this.startView.run();
-    }
-    if (this.currentView === "game") {
-      this.gameView.run();
-    }
-    if (this.currentView === "over") {
-      this.gameOverView.run();
-    }
+    setTimeout(() => {
+      if (this.currentView === "start") {
+        this.startView.run();
+      }
+      if (this.currentView === "game") {
+        this.gameView.run();
+      }
+      if (this.currentView === "over") {
+        this.gameOverView.run();
+      }
+    }, 50);
   }
 
   public updateView(view: "start" | "game" | "over") {
