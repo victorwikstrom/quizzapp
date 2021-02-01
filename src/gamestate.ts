@@ -11,7 +11,7 @@ class GameState {
   pauseButton: HTMLElement;
 
   soundBar: HTMLElement;
-  //logoImage: HTMLImageElement;
+  logoImage: HTMLImageElement;
 
   constructor() {
     this.currentView = "start";
@@ -36,8 +36,8 @@ class GameState {
     this.soundBar.appendChild(this.playButton);
     this.soundBar.appendChild(this.pauseButton);
 
-    // this.logoImage = document.createElement("img");
-    // this.logoImage.src = "./images/logo.png";
+    this.logoImage = document.createElement("img");
+    this.logoImage.src = "./images/logo.png";
 
     this.playButton.addEventListener("click", () => {
       this.backgroundMusic.play();

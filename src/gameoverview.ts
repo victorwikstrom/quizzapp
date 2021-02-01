@@ -29,8 +29,8 @@ class GameOverView {
 
   public run() {
     this.gameWrapper.appendChild(gameState.soundBar);
-    //this.gameWrapper.appendChild(gameState.logoImage);
-    // gameState.logoImage.classList.add("logo-img-absolute");
+    this.gameWrapper.appendChild(gameState.logoImage);
+    gameState.logoImage.classList.add("logo-img-absolute");
 
     //Sends player back to startview
     this.getLocalStorage();

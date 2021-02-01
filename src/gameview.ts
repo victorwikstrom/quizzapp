@@ -98,8 +98,8 @@ class GameView {
 
   public run() {
     this.gameWrapper.appendChild(gameState.soundBar);
-    //this.gameWrapper.appendChild(gameState.logoImage);
-    //gameState.logoImage.classList.add("logo-img-absolute");
+    this.gameWrapper.appendChild(gameState.logoImage);
+    gameState.logoImage.classList.add("logo-img-absolute");
 
     document.body.appendChild(this.gameWrapper);
     console.log(this.correctNumber);
