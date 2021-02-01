@@ -12,7 +12,6 @@ class GameState {
 
   soundBar: HTMLElement;
   logoImage: HTMLImageElement;
-  // test
 
   constructor() {
     this.currentView = "start";
