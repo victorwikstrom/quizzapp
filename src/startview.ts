@@ -34,7 +34,7 @@ class StartView {
       "<br>" +
       "Mr Tweedle-Dumb Not too clever and seems a bit overly cautious, as their guesses never stray too far from their previous one.";
     this.presentOpponent2.innerHTML =
-      '<img src="./images/stickman-2.png" width="30%" ">' +
+      '<img src="./images/stickman-2.png" width="26%" ">' +
       "<br>" +
       "Mr Smarty-Pants The most clever out of the bunch and fancies themself your true competition. An astute thinker coupled with good memory will provide you a real challenge in the race.";
     this.presentOpponent3.innerHTML =
@@ -87,3 +87,4 @@ class StartView {
     document.body.removeChild(this.gameWrapper);
   }
 }
+

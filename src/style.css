@@ -64,6 +64,7 @@ button:focus {
   display: flex;
   justify-content: center;
   align-content: center;
+  margin: 1rem;
 }
 /* Test för opponent och textbox */
 
@@ -173,6 +174,7 @@ table tr:nth-child(odd) {
 .present-opponent {
   display: flex;
   width: 100%;
+  align-items: flex-start;
 }
 
 .present-opponent > span {
@@ -180,7 +182,7 @@ table tr:nth-child(odd) {
   flex-direction: column;
   justify-items: let;
   align-items: center;
-  padding: 0.4rem;
+  padding: 1rem;
   margin: 0.2rem;
 }
 
