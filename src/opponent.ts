@@ -6,7 +6,7 @@ class Opponent {
   public name: string;
   public personality: string;
   public guess: number;
-  private guessElement;
+  private guessElement: HTMLElement;
 
   private imageSrc: string;
 
