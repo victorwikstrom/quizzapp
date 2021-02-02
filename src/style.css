@@ -174,7 +174,7 @@ table tr:nth-child(odd) {
 .present-opponent {
   display: flex;
   width: 100%;
-  align-items: flex-end;
+  align-items: flex-start;
 }
 
 .present-opponent > span {
