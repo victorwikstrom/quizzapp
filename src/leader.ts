@@ -26,7 +26,7 @@ class Leader {
   public getResponse(guess: number, opponentName: string) {
     if (guess > this.correctNumber) {
       this.response = "lower";
-      return opponentName + " ,please guess a lower number!";
+      return opponentName + ", please guess a lower number!";
     } else if (guess < this.correctNumber) {
       this.response = "higher";
       return opponentName + ", please guess a higher number!";
