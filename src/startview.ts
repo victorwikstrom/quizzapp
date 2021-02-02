@@ -87,3 +87,4 @@ class StartView {
     document.body.removeChild(this.gameWrapper);
   }
 }
+
