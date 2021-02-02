@@ -32,15 +32,15 @@ class StartView {
     this.presentOpponent1.innerHTML =
       '<img src="./images/stickman-1.png" width="30%" ">' +
       "<br>" +
-      "This is your first opponent <br> this is your first opponent <br> this is your first opponent";
+      "Mr Tweedle-Dumb Not too clever and seems a bit overly cautious, as their guesses never stray too far from their previous one.";
     this.presentOpponent2.innerHTML =
       '<img src="./images/stickman-2.png" width="30%" ">' +
       "<br>" +
-      "This is your second opponent <br> this is your second opponent <br> this is your second opponent ";
+      "Mr Smarty-Pants The most clever out of the bunch and fancies themself your true competition. An astute thinker coupled with good memory will provide you a real challenge in the race.";
     this.presentOpponent3.innerHTML =
       '<img src="./images/stickman-3.png" width="30%" ">' +
       "<br>" +
-      "This is your third opponent <br> this is your third opponent <br> this is your third opponent";
+      "Mr Random Rambo More action! Less thinking! Will pick any number that happens to appear in their headspace. No logic, all luck.";
 
     this.startGameButton.innerHTML = "START GAME";
 
@@ -49,7 +49,7 @@ class StartView {
 
     this.gameInstructions.classList.add("gameInstructions");
     this.gameInstructions.innerText =
-      "Guess the correct number before your opponents!";
+      "Your goal in this game is to discover the correct number, hidden somewhere between 1-20. Start your guessing game by picking any number between 1-20. The game leader will then let you know if you've hit the mark or if you need to guess again and prompt you to go higher or lower. You're up against three opponents who will also take turns guessing. I'm not sure telling you this is cheating, but you're all looking for the same number and you can use their guesses to your advantage.";
 
     this.enterNameText.classList.add("name");
     this.enterNameText.innerHTML = "Enter your name:";
