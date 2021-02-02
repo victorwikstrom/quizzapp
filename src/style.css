@@ -49,8 +49,7 @@ button:focus {
 
 .nameInput {
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
+  text-align: center;
   top: 96%;
   right: 3%;
 }
@@ -71,6 +70,8 @@ button:focus {
 .opponents {
   display: flex;
   flex-direction: column;
+
+  
 }
 
 .opponent {
@@ -84,6 +85,12 @@ button:focus {
   text-align: center;
   margin-left: -35%;
   margin-bottom: 20px;
+
+}
+
+.class {
+  font-weight: bold;
+  font-size: 1.5rem;
 }
 
 .opponent-image {
@@ -92,10 +99,21 @@ button:focus {
   margin-right: 10px;
 }
 
+.text-element {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .guessnumber {
+  font-weight: bold;
+
+} */
+
 .textBox {
   display: flex;
   align-items: center;
   justify-content: center;
+  
 }
 
 span {
@@ -108,6 +126,7 @@ input {
   border: 1px solid black;
   border-radius: 10px;
   padding: 10px 10px;
+  text-align: center;
 }
 
 .view-highscore {
@@ -116,7 +135,7 @@ input {
   padding-top: 0.1rem;
   border-radius: 1rem;
   padding: 1rem;
-  width: 50%;
+  width: 15rem;
 
   display: flex;
   align-items: center;
@@ -126,12 +145,16 @@ input {
 
 table {
   text-align: center;
-  padding: 0.2rem;
+  width: 15rem;
+  height:10rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
   background-color: rgb(203, 243, 210);
 }
 
 table tr:nth-child(odd) {
   background-color: rgb(178, 197, 250);
+
 }
 
 .logo-img-start {
@@ -172,7 +195,7 @@ table tr:nth-child(odd) {
 }
 
 button:hover {
-  transform: scale(1.2) perspective(1px);
+  transform: scale(1.4) perspective(1px);
 }
 
 .sound-bar {

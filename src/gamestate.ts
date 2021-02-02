@@ -5,6 +5,9 @@ class GameState {
   gameOverView: GameOverView;
   playerName: string;
 
+  winner: string;
+  guessCount: number;
+
   // gameWrapper: HTMLElement;
   backgroundMusic: HTMLAudioElement;
   playButton: HTMLElement;
@@ -19,6 +22,9 @@ class GameState {
     this.gameView = new GameView();
     this.gameOverView = new GameOverView();
     this.playerName = "";
+
+    this.winner = '';
+    this.guessCount = 0;
 
     this.soundBar = document.createElement("div");
     this.soundBar.innerHTML = "Music:";

@@ -15,8 +15,9 @@ class Opponent {
   ) {
     this.wrapper = document.createElement("div");
     this.image = document.createElement("img")
-    this.textElement = document.createElement("p");
-
+    this.textElement = document.createElement("p")
+    this.textElement.classList.add("text-element");
+    
     this.wrapper.classList.add("opponent");
     
     this.imageSrc = imageSrc;
@@ -24,7 +25,11 @@ class Opponent {
     this.image.classList.add("opponent-image")
     this.name = name;
     this.personality = personality;
+
     this.guess = 0;
+    // this.opponentNumber = this.guess;
+    // this.opponentNumber.classList.add()
+
 
     this.wrapper.appendChild(this.image)
   }
@@ -62,7 +67,12 @@ class Opponent {
   }
 
   public printGuess() {
-    this.textElement.innerHTML = this.name + " " + "<br>" + String(this.guess);
-    this.wrapper.appendChild(this.textElement)
+    let opponentNumber = document.createElement('span');
+    opponentNumber.innerText = String(this.guess);
+    opponentNumber.classList.add('class');
+
+    this.textElement.append(this.name);
+    this.textElement.append(opponentNumber);
+    this.wrapper.appendChild(this.textElement);
   }
 }
