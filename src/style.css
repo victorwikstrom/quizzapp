@@ -253,3 +253,11 @@ button:hover {
 .hidden {
   display: none;
 }
+
+.timer {
+  font-size: 1.5rem;
+  position: absolute;
+  top: 5%;
+  left: auto;
+  right: auto;
+}

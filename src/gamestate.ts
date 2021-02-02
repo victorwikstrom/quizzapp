@@ -23,7 +23,7 @@ class GameState {
     this.gameOverView = new GameOverView();
     this.playerName = "";
 
-    this.winner = '';
+    this.winner = "";
     this.guessCount = 0;
 
     this.soundBar = document.createElement("div");
@@ -55,17 +55,15 @@ class GameState {
   }
 
   public runGame() {
-    setTimeout(() => {
-      if (this.currentView === "start") {
-        this.startView.run();
-      }
-      if (this.currentView === "game") {
-        this.gameView.run();
-      }
-      if (this.currentView === "over") {
-        this.gameOverView.run();
-      }
-    }, 50);
+    if (this.currentView === "start") {
+      this.startView.run();
+    }
+    if (this.currentView === "game") {
+      this.gameView.run();
+    }
+    if (this.currentView === "over") {
+      this.gameOverView.run();
+    }
   }
 
   public updateView(view: "start" | "game" | "over") {

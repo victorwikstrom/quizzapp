@@ -2,54 +2,31 @@ class GameView {
   private correctNumber: number;
   private userNumber: number;
 
-  private gameWrapper: HTMLElement;
+  public gameWrapper: HTMLElement;
 
   private inputField: HTMLInputElement;
-  private guessButton: HTMLElement;
   private textBox: HTMLElement;
 
+  private guessButton: HTMLElement;
   private guessCountElement: HTMLElement;
   // private guessCount: number;
 
   private opponentWrapper: HTMLElement;
-
+  private opponents: Array<Opponent>;
   private leader: Leader;
 
-  /*
-  private opponentElement: HTMLElement;
-  private opponentElement2: HTMLElement;
-  private opponentElement3: HTMLElement;
-
-  private opponentGuess: number;
-  private opponentGuess2: number;
-  private opponentGuess3: number;
-  */
-
-  private opponents: Array<Opponent>;
+  private timeIsUp: boolean;
+  private timerElement: HTMLElement;
+  private countDown: number;
+  private s: number;
+  private ms: number;
 
   private min: number;
   private max: number;
 
-  // private leaderResponse: string;
-
   constructor() {
     this.gameWrapper = document.createElement("div");
     this.gameWrapper.classList.add("game-wrapper", "left");
-
-    this.textBox = document.createElement("span");
-    this.textBox.classList.add("textBox");
-    this.textBox.innerText = "Guess a number between 1-100!";
-
-    this.inputField = document.createElement("input");
-    this.guessButton = document.createElement("button");
-    this.guessButton.classList.add("all-buttons");
-    this.guessButton.innerHTML = "Gissa";
-
-    this.opponents = [
-      new Opponent("Mr Tweedle-Dumb", "dumb", "/images/stickman-1.png"),
-      new Opponent("Mr Random Rambo", "random", "/images/stickman-3.png"),
-      new Opponent("Mr Smarty-Pants", "smart", "/images/stickman-2.png"),
-    ];
 
     this.leader = new Leader();
 
@@ -57,42 +34,51 @@ class GameView {
     this.max = 100;
 
     this.correctNumber = this.leader.correctNumber;
-    this.userNumber = this.getUserInput();
 
+    // USER INPUT
+    this.inputField = document.createElement("input");
+    this.userNumber = this.getUserInput();
+    this.textBox = document.createElement("span");
+    this.textBox.classList.add("textBox");
+    this.textBox.innerText = "Guess a number between 1-100!";
+
+    // GUESS
+    this.guessButton = document.createElement("button");
+    this.guessButton.classList.add("all-buttons");
+    this.guessButton.innerHTML = "Gissa";
     this.guessCountElement = document.createElement("span");
     this.guessCountElement.classList.add("guess-counter");
 
+    // OPPONENTS
+    this.opponents = [
+      new Opponent("Mr Tweedle-Dumb", "dumb", "/images/stickman-1.png"),
+      new Opponent("Mr Random Rambo", "random", "/images/stickman-3.png"),
+      new Opponent("Mr Smarty-Pants", "smart", "/images/stickman-2.png"),
+    ];
     this.opponentWrapper = document.createElement("div");
     this.opponentWrapper.classList.add("opponents");
-
     for (const op of this.opponents) {
       this.opponentWrapper.appendChild(op.wrapper);
     }
 
-    /*
-    this.opponentElement = document.createElement("div");
-    this.opponentElement2 = document.createElement("div");
-    this.opponentElement3 = document.createElement("div");
+    // TIMER
+    this.timeIsUp = false;
+    this.timerElement = document.createElement("p");
+    this.timerElement.classList.add("timer");
+    this.s = 10;
+    this.ms = 0;
+    this.countDown = 0;
 
-    this.opponentElement.classList.add('opponent');
-    this.opponentElement2.classList.add('opponent');
-    this.opponentElement3.classList.add('opponent');
-
-    
-
-    this.opponentGuess = this.getRandomInt(this.min, this.max);
-    this.opponentGuess2 = this.getRandomInt(this.min, this.max);
-    this.opponentGuess3 = this.getRandomInt(this.min, this.max);
-    */
-
-    // this.leaderResponse = "";
-
+    // APPENDS
     this.gameWrapper.appendChild(this.textBox);
     this.gameWrapper.appendChild(this.inputField);
     this.gameWrapper.appendChild(this.guessButton);
     this.gameWrapper.appendChild(this.guessCountElement);
     this.gameWrapper.appendChild(this.leader.wrapper);
+    this.gameWrapper.appendChild(this.timerElement);
+    this.gameWrapper.appendChild(this.opponentWrapper);
   }
+  // ----------------- END OF CONSTRUCTOR
 
   public run() {
 
@@ -103,18 +89,47 @@ class GameView {
 
     document.body.appendChild(this.gameWrapper);
     console.log(this.correctNumber);
+    this.startTimer();
+
+    setInterval(() => {
+      if (this.timeIsUp) {
+        this.stopTimer;
+        this.userNumber = 0;
+        this.getUserAnswer();
+        this.getOpponentAnswers();
+        this.timeIsUp = false;
+      }
+    }, 1000);
+
     this.guessButton.addEventListener("click", () => {
-      // Lagt denna här istället för i konstruktorn så att motståndarnas gissningar visas först när man klickat på gissa-knappen
+      this.stopTimer();
+      this.getUserAnswer();
+      if (this.userNumber != this.correctNumber) {
+        setTimeout(() => {
+          this.getOpponentAnswers();
+        }, 2000);
+      }
+      this.inputField.value = "";
+    });
 
-      /*
-      this.opponentWrapper.appendChild(this.opponentElement);
-      this.opponentWrapper.appendChild(this.opponentElement2);
-      this.opponentWrapper.appendChild(this.opponentElement3);
-      */
-      this.gameWrapper.appendChild(this.opponentWrapper);
-
-      this.printUserAnswer();
-      this.getOpponentAnswers();
+    window.addEventListener("keydown", (e) => {
+      if (e.defaultPrevented) {
+        return; // Do nothing if the event was already processed
+      }
+      if (e.key === "Enter") {
+        this.stopTimer();
+        this.gameWrapper.appendChild(this.opponentWrapper);
+        this.getUserAnswer();
+        if (this.userNumber != this.correctNumber) {
+          setTimeout(() => {
+            this.getOpponentAnswers();
+          }, 2000);
+        }
+        this.inputField.value = "";
+      } else {
+        return;
+      }
+      e.preventDefault();
     });
   }
 
@@ -122,16 +137,24 @@ class GameView {
     document.body.removeChild(this.gameWrapper);
   }
 
-  // Returnerar ett random tal mellan min och max
-  /*
-  private getRandomInt(min: number, max: number) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min);
+  private runNextRound() {
+    this.startTimer();
+    this.printLeaderResponse(gameState.playerName + ", please guess again!");
+    setInterval(() => {
+      if (this.timeIsUp) {
+        this.stopTimer;
+        this.userNumber = 0;
+        this.gameWrapper.appendChild(this.opponentWrapper);
+        this.getUserAnswer();
+        setTimeout(() => {
+          this.getOpponentAnswers();
+        }, 2000);
+        this.timeIsUp = false;
+      }
+    }, 1000);
   }
-  */
 
-  private updateMinMax2(guess: number) {
+  private updateMinMax(guess: number) {
     if (this.leader.response === "higher" && guess >= this.min) {
       this.min = guess + 1;
     } else if (this.leader.response === "lower" && guess <= this.max) {
@@ -141,77 +164,62 @@ class GameView {
     }
   }
 
-  // Uppdaterar this.min och this.man beroende på vad användaren och motståndarna gissar
-  /*
-  private updateMinMax(guess: number, previousGuess: number) {
+  private stopTimer() {
+    this.guessButton.style.opacity = "0";
+    this.timeIsUp = false;
+    this.gameWrapper.removeChild(this.timerElement);
+    clearInterval(this.countDown);
+  }
 
-    if (guess <= this.max && guess >= this.min) {
+  private startTimer() {
+    this.guessButton.style.opacity = "1";
+    this.s = 10;
+    this.timeIsUp = false;
+    this.gameWrapper.appendChild(this.timerElement);
+    this.countDown = setInterval(() => {
+      this.timer();
+    }, 10);
+  }
 
-      if (guess > this.correctNumber && previousGuess > this.correctNumber && guess > previousGuess) {
-
-        this.min = this.min;
-
-        if (previousGuess >= this.max) {
-          this.max = this.max;
-        } else {
-          this.max = previousGuess - 1;
-        }
-
-      } else if (guess > this.correctNumber && previousGuess > this.correctNumber && guess < previousGuess) {
-        this.min = this.min;
-        this.max = guess - 1;
-
-      } else if (guess < this.correctNumber && previousGuess < this.correctNumber && guess > previousGuess) {
-        this.min = guess + 1;
-        this.max = this.max;
-
-      } else if (guess < this.correctNumber && previousGuess < this.correctNumber && guess < previousGuess) {
-
-        if (previousGuess <= this.min) {
-          this.min = this.min
-        } else {
-          this.min = previousGuess + 1;
-        }
-        this.max = this.max;
-
-      } else if (guess < this.correctNumber && previousGuess > this.correctNumber) {
-        this.min = guess + 1;
-
-        if (previousGuess >= this.max) {
-          this.max = this.max;
-        } else {
-          this.max = previousGuess - 1;
-        }
-
-      } else if (guess > this.correctNumber && previousGuess < this.correctNumber) {
-
-        if (previousGuess <= this.min) {
-          this.min = this.min;
-        } else {
-          this.min = previousGuess + 1;
-        }
-
-        this.max = guess - 1;
-      }
+  private timer() {
+    if (this.ms === 0) {
+      this.ms = 99;
+      this.s -= 1;
+    }
+    this.ms -= 1;
+    this.timerElement.innerText = String(this.s) + ":" + String(this.ms);
+    if (this.s < 5) {
+      this.timerElement.style.color = "red";
+    } else {
+      this.timerElement.style.color = "black";
+    }
+    if (this.s === 0 && this.ms === 0) {
+      clearInterval(this.countDown);
+      this.timeIsUp = true;
     }
   }
-  */
 
-  //os Returnerar det numret som användaren skriver i input-fältet
+  // Returnerar det numret som användaren skriver i input-fältet
   private getUserInput() {
-    return Number(this.inputField.value);
+    const input = Number(this.inputField.value);
+    if (input > 100 || isNaN(input)) {
+      return 12345;
+    } else {
+      return input;
+    }
   }
 
   // Hämtar användarens gissning
-  private printUserAnswer() {
+  private getUserAnswer() {
     this.updateGuessCount();
 
     this.userNumber = this.getUserInput();
 
     if (this.userNumber === this.correctNumber) {
-      this.printWinnerMessage(String(localStorage.getItem("name")));
-      this.updateLocalStorage();
-      gameState.updateView('over');
+      setTimeout(() => {
+        this.printWinnerMessage(gameState.playerName);
+        this.updateLocalStorage();
+      }, 1500);
     }
 
     const response = this.leader.getResponse(
@@ -219,8 +227,7 @@ class GameView {
       String(localStorage.getItem("name"))
     );
     this.printLeaderResponse(response);
-    this.updateMinMax2(this.userNumber);
-    console.log(this.min, this.max);
+    this.updateMinMax(this.userNumber);
   }
 
   private printWinnerMessage(opponentName: string) {
@@ -229,89 +236,45 @@ class GameView {
     winnerText.innerHTML = opponentName + ", you are the winner!";
     gameState.winner = opponentName;
     this.gameWrapper.appendChild(winnerText);
+
+    setTimeout(() => {
+      gameState.updateView("over");
+    }, 2000);
   }
 
+  // Loop through all opponents and print their guesses and leaders response
   private getOpponentAnswers() {
-    for (const op of this.opponents) {
-      this.printOpponentAnwers(op);
+    for (let i = 0; i < this.opponents.length; i++) {
+      let op = this.opponents[i];
+      setTimeout(() => {
+        if (op) {
+          if (op?.personality === "dumb") {
+            op.getDumbGuess(this.userNumber, this.correctNumber);
+          } else if (op.personality === "random") {
+            op.getRandomGuess();
+          } else {
+            op.getSmartGuess(this.min, this.max);
+          }
+          // Run each iteration
+          const response = this.leader.getResponse(op.guess, op.name);
+          this.printLeaderResponse(response);
+          this.updateMinMax(op.guess);
+          // Check if the opponents guess was correct
+          setTimeout(() => {
+            if (op?.guess === this.correctNumber) {
+              this.printWinnerMessage(op.name);
+            }
+          }, 1500);
+          // If opponents guess was incorrect, start next round
+          if (i === 2 && op?.guess != this.correctNumber) {
+            setTimeout(() => {
+              this.runNextRound();
+            }, 2000);
+          }
+        }
+      }, 2000 * i);
     }
   }
-
-  // Genererar svar för motståndarna
-  private printOpponentAnwers(op: Opponent) {
-    if (op.personality === "dumb") {
-      setTimeout(() => {
-        op.getDumbGuess(this.userNumber, this.correctNumber);
-        const response = this.leader.getResponse(op.guess, op.name);
-        this.printLeaderResponse(response);
-        this.updateMinMax2(op.guess);
-        console.log(this.min, this.max);
-
-        if (op.guess === this.correctNumber) {
-          this.printWinnerMessage(op.name);
-          gameState.updateView("over");
-        }
-      }, 2000);
-
-    } else if (op.personality === "random") {
-      setTimeout(() => {
-        op.getRandomGuess();
-        const response = this.leader.getResponse(op.guess, op.name);
-        this.printLeaderResponse(response);
-        this.updateMinMax2(op.guess);
-        console.log(this.min, this.max);
-
-        if (op.guess === this.correctNumber) {
-          this.printWinnerMessage(op.name);
-          gameState.updateView("over");
-        }
-      }, 4000);
-
-    } else {
-      setTimeout(() => {
-        op.getSmartGuess(this.min, this.max);
-        const response = this.leader.getResponse(op.guess, op.name);
-        this.printLeaderResponse(response);
-        this.updateMinMax2(op.guess);
-        console.log(this.min, this.max);
-
-        if (op.guess === this.correctNumber) {
-          this.printWinnerMessage(op.name);
-          gameState.updateView("over");
-        }
-      }, 6000);
-    }
-  }
-
-  /*
-    setTimeout(() => {
-      this.opponentGuess = this.getRandomInt(this.min, this.max);
-      this.opponentElement.innerHTML = "Opponent 1:" + '<br>' + String(this.opponentGuess) + '<br>' + this.getAnswerForOpponent(this.opponentGuess);
-      this.updateMinMax(this.opponentGuess, this.userNumber)
-      this.getWinner(this.opponentGuess);
-      console.log('Opponent 1: ' + this.opponentGuess)
-      console.log('Min: ' + this.min + ', Max: ' + this.max)
-    }, 2000)
-
-    setTimeout(() => {
-      this.opponentGuess2 = this.getDumbGuess(this.opponentGuess)
-      this.opponentElement2.innerHTML = "Opponent 2:" + '<br>' + String(this.opponentGuess2) + '<br>' + this.getAnswerForOpponent(this.opponentGuess2);
-      this.updateMinMax(this.opponentGuess2, this.opponentGuess)
-      this.getWinner(this.opponentGuess2);
-      console.log('Opponent 2: ' + this.opponentGuess2)
-      console.log('Min: ' + this.min + ', Max: ' + this.max)
-    }, 4000);
-
-    setTimeout(() => {
-      this.opponentGuess3 = this.getRandomInt(1, 100);
-      this.opponentElement3.innerHTML = "Opponent 3:" + '<br>' + String(this.opponentGuess3) + '<br>' + this.getAnswerForOpponent(this.opponentGuess3);
-      this.updateMinMax(this.opponentGuess3, this.opponentGuess2)
-      this.getWinner(this.opponentGuess3);
-      console.log('Opponent 3: ' + this.opponentGuess3)
-      console.log('Min: ' + this.min + ', Max: ' + this.max)
-    }, 6000);
-  }
-    */
 
   // Ökar antal gissningar med 1
   private updateGuessCount() {
@@ -320,7 +283,7 @@ class GameView {
   }
 
   private printLeaderResponse(response: string) {
-    if (this.leader.responseWrapper.childNodes.length === 4) {
+    if (this.leader.responseWrapper.childNodes.length === 1) {
       this.leader.responseWrapper.innerHTML = "";
     }
     const responseWrapper = document.createElement("div");
@@ -333,21 +296,6 @@ class GameView {
     this.leader.responseWrapper.appendChild(responseWrapper);
     this.gameWrapper.appendChild(this.leader.responseWrapper);
   }
-
-  // Svaret på användarens gissning
-  // private getAnswerForUser(number: number) {
-  //   if (number > 100 || number < 0 || isNaN(number)) {
-  //     return "Please choose a number between 1-100";
-  //   } else if (number > this.correctNumber) {
-  //     return "User, please guess a lower number!";
-  //   } else if (number < this.correctNumber) {
-  //     return "User, please guess a higher number!";
-  //   } else {
-  //     this.updateLocalStorage();
-  //     gameState.updateView("over");
-  //     return "User, you are correct!";
-  //   }
-  // }
 
   private updateLocalStorage() {
     let players: Array<object> = JSON.parse(localStorage.getItem("highscore"));

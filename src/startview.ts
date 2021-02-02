@@ -1,5 +1,5 @@
 class StartView {
-  private gameWrapper: HTMLElement;
+  public gameWrapper: HTMLElement;
   private startGameButton: HTMLElement;
   private inputName: HTMLInputElement;
   private presentOpponent: HTMLElement;
@@ -75,10 +75,10 @@ class StartView {
     gameState.logoImage.classList.add("logo-img-start");
 
     document.body.appendChild(this.gameWrapper);
+
     this.startGameButton.addEventListener("click", () => {
       gameState.playerName = this.inputName.value;
       localStorage.setItem("name", gameState.playerName);
-
       gameState.updateView("game");
     });
   }
