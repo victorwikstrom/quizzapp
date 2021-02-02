@@ -32,15 +32,15 @@ class StartView {
     this.presentOpponent1.innerHTML =
       '<img src="./images/stickman-1.png" width="30%" ">' +
       "<br>" +
-      "This is your first opponent this is your first opponent this is your first opponent";
+      "This is your first opponent <br> this is your first opponent <br> this is your first opponent";
     this.presentOpponent2.innerHTML =
       '<img src="./images/stickman-2.png" width="30%" ">' +
       "<br>" +
-      "This is your second opponent this is your second opponent this is your second opponent ";
+      "This is your second opponent <br> this is your second opponent <br> this is your second opponent ";
     this.presentOpponent3.innerHTML =
       '<img src="./images/stickman-3.png" width="30%" ">' +
       "<br>" +
-      "This is your third opponent this is your third opponent this is your third opponent";
+      "This is your third opponent <br> this is your third opponent <br> this is your third opponent";
 
     this.startGameButton.innerHTML = "START GAME";
 

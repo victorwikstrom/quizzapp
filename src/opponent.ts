@@ -15,7 +15,7 @@ class Opponent {
   ) {
     this.wrapper = document.createElement("div");
     this.image = document.createElement("img")
-    this.textElement = document.createElement("p")
+    this.textElement = document.createElement("p");
 
     this.wrapper.classList.add("opponent");
     

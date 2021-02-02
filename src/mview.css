@@ -1,6 +1,71 @@
 @media (max-width: 600px) {
-    .game-wrapper {
-        height: 100%;
-        width: 100%;
-    }
+  .game-wrapper {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+  }
+  .opponents {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+  }
+  .opponent {
+    min-width: 10px;
+    height: 100;
+    margin-bottom: 20%;
+    top: 50%;
+  }
+  .opponent-image {
+    height: 56px;
+    width: auto;
+    margin-right: 20px;
+  }
+  .leader {
+    margin-right: -6%;
+    width: 20%;
+  }
+  .leader-response {
+    right: 16%;
+    font-size: small;
+    width: 10%;
+  }
+  .textBox {
+    font-size: 1rem;
+    position: absolute;
+    top: 1%;
+  }
+  .sound-bar {
+    position: absolute;
+    top: 92%;
+    right: 59%;
+  }
+  .response-bubble {
+    border: 2px solid black;
+    padding: 2px 4px;
+    margin-bottom: 5px;
+  }
+  input {
+    font-size: .8rem;
+    width: 30%;
+    height: .5rem;
+  }
+  .logo-img-absolute {
+    margin-top:5%;
+    width: 15%;
+  }
+  .gameInstructions {
+    padding: 4rem, 2rem;
+    font-size: small;
+  }
+  .guess-counter {
+    position: absolute;
+    top: 15%;
+    left: 4%;
+  }
+  .opponentText {
+    position: absolute;
+    right: 20%;
+    top: 20%;
+    font-size: small;
+  }
 }
