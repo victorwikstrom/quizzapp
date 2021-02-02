@@ -1,6 +1,12 @@
 @media (max-width: 1024px) {
+    body {
+        margin: 0;
+        overflow: hidden;
+    }
     .game-wrapper {
+        overflow: hidden;
         height: 100%;
         width: 100%;
     }
+   
 }

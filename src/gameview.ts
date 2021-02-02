@@ -9,7 +9,7 @@ class GameView {
 
   private guessButton: HTMLElement;
   private guessCountElement: HTMLElement;
-  private guessCount: number;
+  // private guessCount: number;
 
   private opponentWrapper: HTMLElement;
   private opponents: Array<Opponent>;
@@ -48,8 +48,6 @@ class GameView {
     this.guessButton.innerHTML = "Gissa";
     this.guessCountElement = document.createElement("span");
     this.guessCountElement.classList.add("guess-counter");
-    this.guessCount = 0;
-    this.guessCountElement.innerText = String(this.guessCount);
 
     // OPPONENTS
     this.opponents = [
@@ -83,6 +81,8 @@ class GameView {
   // ----------------- END OF CONSTRUCTOR
 
   public run() {
+
+    this.guessCountElement.innerText = String(gameState.guessCount);
     this.gameWrapper.appendChild(gameState.soundBar);
     this.gameWrapper.appendChild(gameState.logoImage);
     gameState.logoImage.classList.add("logo-img-absolute");
@@ -234,6 +234,7 @@ class GameView {
     const winnerText = document.createElement("h1");
     winnerText.classList.add("winner-text");
     winnerText.innerHTML = opponentName + ", you are the winner!";
+    gameState.winner = opponentName;
     this.gameWrapper.appendChild(winnerText);
 
     setTimeout(() => {
@@ -277,8 +278,8 @@ class GameView {
 
   // Ökar antal gissningar med 1
   private updateGuessCount() {
-    this.guessCount++;
-    this.guessCountElement.innerText = String(this.guessCount);
+    gameState.guessCount++;
+    this.guessCountElement.innerText = String(gameState.guessCount);
   }
 
   private printLeaderResponse(response: string) {
@@ -300,9 +301,8 @@ class GameView {
     let players: Array<object> = JSON.parse(localStorage.getItem("highscore"));
 
     let player: string | null = localStorage.getItem("name");
-    console.log(player);
 
-    let score: number = this.guessCount;
+    let score: number = gameState.guessCount;
 
     let playerObject: object = {
       player: player,
@@ -314,8 +314,6 @@ class GameView {
     } else {
       players.push(playerObject);
     }
-
-    console.log(players);
 
     localStorage.setItem("score", JSON.stringify(playerObject));
     localStorage.setItem("highscore", JSON.stringify(players));
