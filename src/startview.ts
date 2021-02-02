@@ -1,5 +1,5 @@
 class StartView {
-  private gameWrapper: HTMLElement;
+  public gameWrapper: HTMLElement;
   private startGameButton: HTMLElement;
   private inputName: HTMLInputElement;
   private presentOpponent: HTMLElement;
