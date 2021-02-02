@@ -9,7 +9,7 @@ class GameView {
   private textBox: HTMLElement;
 
   private guessCountElement: HTMLElement;
-  private guessCount: number;
+  // private guessCount: number;
 
   private opponentWrapper: HTMLElement;
 
@@ -61,8 +61,6 @@ class GameView {
 
     this.guessCountElement = document.createElement("span");
     this.guessCountElement.classList.add("guess-counter");
-    this.guessCount = 0;
-    this.guessCountElement.innerText = String(this.guessCount);
 
     this.opponentWrapper = document.createElement("div");
     this.opponentWrapper.classList.add("opponents");
@@ -97,9 +95,11 @@ class GameView {
   }
 
   public run() {
+
+    this.guessCountElement.innerText = String(gameState.guessCount);
     this.gameWrapper.appendChild(gameState.soundBar);
-    //this.gameWrapper.appendChild(gameState.logoImage);
-    //gameState.logoImage.classList.add("logo-img-absolute");
+    this.gameWrapper.appendChild(gameState.logoImage);
+    gameState.logoImage.classList.add("logo-img-absolute");
 
     document.body.appendChild(this.gameWrapper);
     console.log(this.correctNumber);
@@ -211,6 +211,7 @@ class GameView {
     if (this.userNumber === this.correctNumber) {
       this.printWinnerMessage(String(localStorage.getItem("name")));
       this.updateLocalStorage();
+      gameState.updateView('over');
     }
 
     const response = this.leader.getResponse(
@@ -226,11 +227,8 @@ class GameView {
     const winnerText = document.createElement("h1");
     winnerText.classList.add("winner-text");
     winnerText.innerHTML = opponentName + ", you are the winner!";
+    gameState.winner = opponentName;
     this.gameWrapper.appendChild(winnerText);
-
-    setTimeout(() => {
-      gameState.updateView("over");
-    }, 1500);
   }
 
   private getOpponentAnswers() {
@@ -248,13 +246,13 @@ class GameView {
         this.printLeaderResponse(response);
         this.updateMinMax2(op.guess);
         console.log(this.min, this.max);
+
+        if (op.guess === this.correctNumber) {
+          this.printWinnerMessage(op.name);
+          gameState.updateView("over");
+        }
       }, 2000);
 
-      if (op.guess === this.correctNumber) {
-        setTimeout(() => {
-          this.printWinnerMessage(op.name);
-        }, 2000);
-      }
     } else if (op.personality === "random") {
       setTimeout(() => {
         op.getRandomGuess();
@@ -262,13 +260,13 @@ class GameView {
         this.printLeaderResponse(response);
         this.updateMinMax2(op.guess);
         console.log(this.min, this.max);
+
+        if (op.guess === this.correctNumber) {
+          this.printWinnerMessage(op.name);
+          gameState.updateView("over");
+        }
       }, 4000);
 
-      if (op.guess === this.correctNumber) {
-        setTimeout(() => {
-          this.printWinnerMessage(op.name);
-        }, 4000);
-      }
     } else {
       setTimeout(() => {
         op.getSmartGuess(this.min, this.max);
@@ -276,13 +274,12 @@ class GameView {
         this.printLeaderResponse(response);
         this.updateMinMax2(op.guess);
         console.log(this.min, this.max);
-      }, 6000);
 
-      if (op.guess === this.correctNumber) {
-        setTimeout(() => {
+        if (op.guess === this.correctNumber) {
           this.printWinnerMessage(op.name);
-        }, 6000);
-      }
+          gameState.updateView("over");
+        }
+      }, 6000);
     }
   }
 
@@ -318,8 +315,8 @@ class GameView {
 
   // Ökar antal gissningar med 1
   private updateGuessCount() {
-    this.guessCount++;
-    this.guessCountElement.innerText = String(this.guessCount);
+    gameState.guessCount++;
+    this.guessCountElement.innerText = String(gameState.guessCount);
   }
 
   private printLeaderResponse(response: string) {
@@ -356,9 +353,8 @@ class GameView {
     let players: Array<object> = JSON.parse(localStorage.getItem("highscore"));
 
     let player: string | null = localStorage.getItem("name");
-    console.log(player);
 
-    let score: number = this.guessCount;
+    let score: number = gameState.guessCount;
 
     let playerObject: object = {
       player: player,
@@ -370,8 +366,6 @@ class GameView {
     } else {
       players.push(playerObject);
     }
-
-    console.log(players);
 
     localStorage.setItem("score", JSON.stringify(playerObject));
     localStorage.setItem("highscore", JSON.stringify(players));

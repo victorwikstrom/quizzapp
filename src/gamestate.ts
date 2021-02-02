@@ -5,13 +5,16 @@ class GameState {
   gameOverView: GameOverView;
   playerName: string;
 
+  winner: string;
+  guessCount: number;
+
   // gameWrapper: HTMLElement;
   backgroundMusic: HTMLAudioElement;
   playButton: HTMLElement;
   pauseButton: HTMLElement;
 
   soundBar: HTMLElement;
-  //logoImage: HTMLImageElement;
+  logoImage: HTMLImageElement;
 
   constructor() {
     this.currentView = "start";
@@ -19,6 +22,9 @@ class GameState {
     this.gameView = new GameView();
     this.gameOverView = new GameOverView();
     this.playerName = "";
+
+    this.winner = '';
+    this.guessCount = 0;
 
     this.soundBar = document.createElement("div");
     this.soundBar.innerHTML = "Music:";
@@ -36,8 +42,8 @@ class GameState {
     this.soundBar.appendChild(this.playButton);
     this.soundBar.appendChild(this.pauseButton);
 
-    // this.logoImage = document.createElement("img");
-    // this.logoImage.src = "./images/logo.png";
+    this.logoImage = document.createElement("img");
+    this.logoImage.src = "./images/logo.png";
 
     this.playButton.addEventListener("click", () => {
       this.backgroundMusic.play();
