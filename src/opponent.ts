@@ -1,10 +1,12 @@
 class Opponent {
   public wrapper: HTMLElement;
   public textElement: HTMLElement;
+  private nameElement: HTMLElement;
   public image: HTMLImageElement;
   public name: string;
   public personality: string;
   public guess: number;
+  private guessElement;
 
   private imageSrc: string;
 
@@ -14,24 +16,33 @@ class Opponent {
     imageSrc: string
   ) {
     this.wrapper = document.createElement("div");
-    this.image = document.createElement("img")
-    this.textElement = document.createElement("p")
+    this.image = document.createElement("img");
+    this.textElement = document.createElement("div");
+    this.nameElement = document.createElement("p");
+    this.guessElement = document.createElement("p");
+
+    this.guessElement.innerText = "-";
+
     this.textElement.classList.add("text-element");
-    
+    this.guessElement.classList.add("class");
+
     this.wrapper.classList.add("opponent");
-    
+
     this.imageSrc = imageSrc;
-    this.image.src = this.imageSrc
-    this.image.classList.add("opponent-image")
+    this.image.src = this.imageSrc;
+    this.image.classList.add("opponent-image");
     this.name = name;
     this.personality = personality;
+
+    this.nameElement.innerText = this.name;
 
     this.guess = 0;
     // this.opponentNumber = this.guess;
     // this.opponentNumber.classList.add()
-
-
-    this.wrapper.appendChild(this.image)
+    this.textElement.appendChild(this.nameElement);
+    this.textElement.append(this.guessElement);
+    this.wrapper.appendChild(this.image);
+    this.wrapper.appendChild(this.textElement);
   }
 
   public getDumbGuess(previousGuess: number, correctNumber: number) {
@@ -44,8 +55,6 @@ class Opponent {
     setTimeout(() => {
       this.printGuess();
     }, 0);
-
-    
   }
 
   public getRandomGuess() {
@@ -67,12 +76,6 @@ class Opponent {
   }
 
   public printGuess() {
-    let opponentNumber = document.createElement('span');
-    opponentNumber.innerText = String(this.guess);
-    opponentNumber.classList.add('class');
-
-    this.textElement.append(this.name);
-    this.textElement.append(opponentNumber);
-    this.wrapper.appendChild(this.textElement);
+    this.guessElement.innerText = String(this.guess);
   }
 }

@@ -38,20 +38,20 @@ class GameOverView {
   }
 
   private updateText() {
-
     let scoreLS = JSON.parse(localStorage.getItem("score"));
 
     if (gameState.winner == gameState.playerName) {
       this.highScore.innerHTML =
-        "Good job, " + scoreLS.player + ". Feast your eyes on your score: " + scoreLS.score;
+        "Good job, " +
+        scoreLS.player +
+        ". Feast your eyes on your score: " +
+        scoreLS.score;
     } else {
-      this.highScore.innerText = gameState.winner + ' won!'
+      this.highScore.innerText = gameState.winner + " won!";
     }
-
   }
 
   private getHighScoreFromLS() {
-
     let highScoreLS = JSON.parse(localStorage.getItem("highscore"));
     let highScoreTable = document.createElement("table");
 
@@ -64,9 +64,14 @@ class GameOverView {
     highScoreTable.appendChild(th1);
     highScoreTable.appendChild(th2);
 
-    highScoreLS.sort((a: any, b: any) => a.score - b.score)
+    let highScoreTop5;
 
-    let highScoreTop5 = highScoreLS.slice(0, 5);
+    if (highScoreLS !== null) {
+      highScoreLS.sort((a: any, b: any) => a.score - b.score);
+      highScoreTop5 = highScoreLS.slice(0, 5);
+    } else {
+      highScoreTop5 = [];
+    }
 
     for (const hs of highScoreTop5) {
       let tr = document.createElement("tr");
@@ -82,6 +87,6 @@ class GameOverView {
       highScoreTable.appendChild(tr);
     }
 
-      this.highScore.append(highScoreTable);
+    this.highScore.append(highScoreTable);
   }
 }
