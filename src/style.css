@@ -3,48 +3,44 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   font-family: "Gaegu", cursive;
+  min-height: 99vh;
 }
 
-input:focus,
-button:focus {
+input:focus, button:focus {
   outline: none;
 }
 
 .game-wrapper {
-  height: 99vh;
-  width: 60vw;
-  background-color: rgb(178, 197, 250);
-
-  border: 5px solid rgb(203, 243, 210);
-  border-radius: 0.5rem;
-
-  position: relative;
-
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  width: 70vw;
+  min-height: 99vh;
+  background-color: rgb(178, 197, 250);
+  border: 0.3rem solid rgb(203, 243, 210);
+  border-radius: 0.5rem;
+  position: relative;
 }
 
-/* Margin mellan elementen */
-.game-wrapper > * {
-  margin-bottom: 1rem;
-}
+/**************** START VIEW ***************/
 
 .start-view {
   background-color: rgb(178, 197, 250);
 }
 
-.over-view {
-  background-color: rgb(178, 197, 250);
+.gameInstructions {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 1rem;
 }
 
-.guess-counter {
-  position: absolute;
-  top: 20%;
-  left: 9%;
+.name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nameInput {
@@ -54,48 +50,143 @@ button:focus {
   right: 3%;
 }
 
-.name {
+.present-opponent {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  align-items: flex-start;
 }
 
-.gameInstructions {
+.present-opponent>span {
   display: flex;
-  justify-content: center;
-  align-content: center;
-  margin: 1rem;
+  flex-direction: column;
+  justify-items: left;
+  align-items: center;
+  padding: 1rem;
+  margin: 0.2rem;
 }
-/* Test för opponent och textbox */
+
+.logo-img-start {
+  width: 15vw;
+  height: auto;
+}
+
+/**************** GAME VIEW ***************/
+
+.guess-counter {
+  position: absolute;
+  top: 20%;
+  left: 9%;
+}
 
 .opponents {
   display: flex;
   flex-direction: column;
-
-  
 }
 
-.opponent {
-  min-width: 250px;
-  height: 100;
+.leader {
+  position: absolute;
+  right: 10%;
+  top: auto;
+  bottom: auto;
+  width: 15vw;
+}
 
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.response-bubble {
+  background-color: white;
+  border: 0.1rem solid black;
+  padding: 5px 2px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  min-width: 15vw;
+}
+
+.leader-response {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  right: 20%;
+  top: auto;
+  bottom: auto;
+  margin-bottom: -5%;
+  max-width: 20%;
+}
+
+.timer {
+  font-size: 1.5rem;
+  position: absolute;
+  top: 5%;
+  left: auto;
+  right: auto;
+}
+
+.bold-numbers {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.textBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/**************** OVER VIEW ***************/
+
+.over-view {
+  background-color: rgb(178, 197, 250);
+}
+
+.view-highscore {
+  text-align: center;
+  background-color: #ffcea8;
+  padding-top: 0.1rem;
+  border-radius: 1rem;
+  padding: 1rem;
+  width: 15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+table {
+  text-align: center;
+  width: 15rem;
+  height: 10rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  background-color: rgb(203, 243, 210);
+}
+
+table tr:nth-child(odd) {
+  background-color: rgb(178, 197, 250);
+}
+
+/**** OPPONENT *******/
+
+.opponent {
+  min-width: 15rem;
+  height: 100;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   text-align: center;
   margin-left: -35%;
-  margin-bottom: 20px;
-
-}
-
-.class {
-  font-weight: bold;
-  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .opponent-image {
-  height: 100px;
+  height: 8vw;
   width: auto;
   margin-right: 10px;
 }
@@ -105,17 +196,7 @@ button:focus {
   flex-direction: column;
 }
 
-/* .guessnumber {
-  font-weight: bold;
-
-} */
-
-.textBox {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
-}
+/*** DIVERSE ***/
 
 span {
   padding: 1rem;
@@ -130,39 +211,6 @@ input {
   text-align: center;
 }
 
-.view-highscore {
-  text-align: center;
-  background-color: #ffcea8;
-  padding-top: 0.1rem;
-  border-radius: 1rem;
-  padding: 1rem;
-  width: 15rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-table {
-  text-align: center;
-  width: 15rem;
-  height:10rem;
-  padding: 0.5rem;
-  border-radius: 1rem;
-  background-color: rgb(203, 243, 210);
-}
-
-table tr:nth-child(odd) {
-  background-color: rgb(178, 197, 250);
-
-}
-
-.logo-img-start {
-  width: 15vw;
-  height: auto;
-}
-
 .logo-img-absolute {
   width: 8vw;
   height: auto;
@@ -171,25 +219,16 @@ table tr:nth-child(odd) {
   top: 5%;
 }
 
-.present-opponent {
-  display: flex;
-  width: 100%;
-  align-items: flex-start;
-}
-
-.present-opponent > span {
-  display: flex;
-  flex-direction: column;
-  justify-items: let;
-  align-items: center;
-  padding: 1rem;
-  margin: 0.2rem;
+.winner-text {
+  font-size: 1rem;
 }
 
 /* //Buttons  */
+
 .all-buttons {
   border: 0.1rem solid black;
   margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   padding: 0.5rem;
   border-radius: 2rem;
   font-family: "Gaegu", bold;
@@ -197,7 +236,7 @@ table tr:nth-child(odd) {
 }
 
 button:hover {
-  transform: scale(1.4) perspective(1px);
+  transform: scale(1.2) perspective(1px);
 }
 
 .sound-bar {
@@ -216,50 +255,10 @@ button:hover {
   outline: none;
 }
 
-.leader {
-  margin-right: -5%;
-  position: absolute;
-  right: 0%;
-  top: auto;
-  bottom: auto;
-
-  width: 25%;
-}
-
-.response-bubble {
-  background-color: white;
-  border: 2px solid black;
-  padding: 5px 2px;
-  margin-bottom: 20px;
-  border-radius: 20px;
-}
-
-.leader-response {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-
-  position: absolute;
-  right: 20%;
-  top: auto;
-  bottom: auto;
-
-  margin-bottom: -5%;
-
-  max-width: 20%;
+button {
+  transition: all 200ms ease;
 }
 
 .hidden {
   display: none;
-}
-
-.timer {
-  font-size: 1.5rem;
-  position: absolute;
-  top: 5%;
-  left: auto;
-  right: auto;
 }

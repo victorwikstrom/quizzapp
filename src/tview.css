@@ -1,12 +1,65 @@
 @media (max-width: 1024px) {
     body {
         margin: 0;
-        overflow: hidden;
     }
     .game-wrapper {
-        overflow: hidden;
-        height: 100%;
-        width: 100%;
+        width: 100vw;
     }
-   
+    .opponent-image {
+        height: 15vw;
+    }
+    .opponent {
+        margin-bottom: 2vh;
+    }
+    .logo-img-absolute {
+        left: 1%;
+        top: 1%;
+        width: 17vw;
+    }
+    .logo-img-start {
+        width: 30vw;
+    }
+    .textBox {
+        display: none;
+    }
+    .leader {
+        width: 20vh;
+        right: 5%;
+        top: 20%;
+    }
+    .leader-response {
+        right: 30%;
+        top: 90%;
+        bottom: auto;
+    }
+    .response-bubble {
+        min-width: 15vw;
+    }
+    .timer {
+        font-size: 1.5rem;
+        position: absolute;
+        top: 1%;
+        left: auto;
+        right: 5%;
+    }
+    .sound-bar {
+        top: auto;
+        bottom: 2%;
+        right: 4%;
+    }
+    .guess-counter {
+        left: auto;
+        right: auto;
+        top: 3%;
+    }
+    button {
+        transition: none;
+    }
+
+    h4 {
+        position: absolute;
+        bottom: 3%;
+        left: auto;
+        right: auto;
+    }
 }

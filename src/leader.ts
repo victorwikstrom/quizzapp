@@ -10,13 +10,14 @@ class Leader {
     this.wrapper = document.createElement("div");
     this.wrapper.classList.add("leader");
     this.wrapper.innerHTML =
-      '<img src="./images/gamemaster.png" width="80%" ">';
+      '<img src="./images/gamemaster.png "width= 100%">';
     this.responseWrapper = document.createElement("div");
     this.responseWrapper.classList.add("leader-response");
 
     this.response = "";
     this.responseText = "";
     this.correctNumber = this.getCorrectNumber();
+
   }
 
   private getCorrectNumber() {
