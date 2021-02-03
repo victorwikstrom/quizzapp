@@ -4,6 +4,7 @@ class GameView {
 
   public gameWrapper: HTMLElement;
 
+  private inputWrapper: HTMLElement;
   private inputField: HTMLInputElement;
   private textBox: HTMLElement;
 
@@ -36,18 +37,24 @@ class GameView {
     this.correctNumber = this.leader.correctNumber;
 
     // USER INPUT
+    this.inputWrapper = document.createElement("div")
     this.inputField = document.createElement("input");
     this.userNumber = this.getUserInput();
     this.textBox = document.createElement("span");
     this.textBox.classList.add("textBox");
     this.textBox.innerText = "Guess a number between 1-100!";
-
+    
     // GUESS
     this.guessButton = document.createElement("button");
     this.guessButton.classList.add("all-buttons");
-    this.guessButton.innerHTML = "Gissa";
+    this.guessButton.innerHTML = "Guess";
     this.guessCountElement = document.createElement("span");
+    this.guessCountElement.innerText = "Guess count: "
     this.guessCountElement.classList.add("guess-counter");
+
+    this.inputWrapper.appendChild(this.inputField)
+    this.inputWrapper.appendChild(this.guessButton)
+    this.inputWrapper.classList.add("input-wrapper")
 
     // OPPONENTS
     this.opponents = [
@@ -71,8 +78,7 @@ class GameView {
 
     // APPENDS
     this.gameWrapper.appendChild(this.textBox);
-    this.gameWrapper.appendChild(this.inputField);
-    this.gameWrapper.appendChild(this.guessButton);
+    this.gameWrapper.appendChild(this.inputWrapper);
     this.gameWrapper.appendChild(this.guessCountElement);
     this.gameWrapper.appendChild(this.leader.wrapper);
     this.gameWrapper.appendChild(this.timerElement);
@@ -82,9 +88,10 @@ class GameView {
 
   public run() {
 
-    this.guessCountElement.innerText = String(gameState.guessCount);
+    this.guessCountElement.innerText = "Guess count: " + String(gameState.guessCount);
     this.gameWrapper.appendChild(gameState.soundBar);
     this.gameWrapper.appendChild(gameState.logoImage);
+    gameState.logoImage.classList.remove("logo-img-start");
     gameState.logoImage.classList.add("logo-img-absolute");
 
     document.body.appendChild(this.gameWrapper);
@@ -231,8 +238,8 @@ class GameView {
   }
 
   private printWinnerMessage(opponentName: string) {
-    const winnerText = document.createElement("h1");
-    winnerText.classList.add("winner-text");
+    const winnerText = document.createElement("h4");
+    winnerText.classList.add("xtext");
     winnerText.innerHTML = opponentName + ", you are the winner!";
     gameState.winner = opponentName;
     this.gameWrapper.appendChild(winnerText);
@@ -279,7 +286,7 @@ class GameView {
   // Ökar antal gissningar med 1
   private updateGuessCount() {
     gameState.guessCount++;
-    this.guessCountElement.innerText = String(gameState.guessCount);
+    this.guessCountElement.innerText = "Guess count: " + String(gameState.guessCount);
   }
 
   private printLeaderResponse(response: string) {
@@ -294,7 +301,8 @@ class GameView {
 
     responseWrapper.appendChild(responseElem);
     this.leader.responseWrapper.appendChild(responseWrapper);
-    this.gameWrapper.appendChild(this.leader.responseWrapper);
+    this.leader.wrapper.appendChild(this.leader.responseWrapper)
+    //this.gameWrapper.appendChild(this.leader.responseWrapper);
   }
 
   private updateLocalStorage() {

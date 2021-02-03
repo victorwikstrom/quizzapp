@@ -24,7 +24,7 @@ class Opponent {
     this.guessElement.innerText = "-";
 
     this.textElement.classList.add("text-element");
-    this.guessElement.classList.add("class");
+    this.guessElement.classList.add("bold-numbers");
 
     this.wrapper.classList.add("opponent");
 

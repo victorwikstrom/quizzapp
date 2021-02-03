@@ -1,19 +1,29 @@
 @media (max-width: 600px) {
   .game-wrapper {
-    overflow: hidden;
-    height: 100%;
+    /* overflow: hidden; */
     width: 100%;
+    margin-bottom: 0;
+    
   }
   .opponents {
     display: flex;
     flex-direction: column;
-    width: 80%;
+  }
+  .opponent-image {
+    height: 30vw;
+  }
+  .timer {
+    top: 30%;
+    bottom: auto;
   }
   .opponent {
     min-width: 10px;
     height: 100;
-    margin-bottom: 20%;
+    margin-bottom: 2vh;
     top: 50%;
+  }
+  p {
+    margin: 10px 0;
   }
   .opponent-image {
     height: 56px;
@@ -21,51 +31,71 @@
     margin-right: 20px;
   }
   .leader {
-    margin-right: -6%;
-    width: 20%;
+    position: static;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50vw;
   }
   .leader-response {
-    right: 16%;
+    position: static;
     font-size: small;
-    width: 10%;
+    max-width: 100%;
   }
   .textBox {
     font-size: 1rem;
-    position: absolute;
-    top: 1%;
-  }
-  .sound-bar {
-    position: absolute;
-    top: 92%;
-    right: 59%;
   }
   .response-bubble {
     border: 2px solid black;
     padding: 2px 4px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
+    min-width: 30%;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   input {
     font-size: .8rem;
-    width: 30%;
-    height: .5rem;
+    width: 100%;
+    height: 0.8rem;
+    margin-right: 1rem;
+    max-width: 150px;
+    margin: 10px 0;
   }
-  .logo-img-absolute {
-    margin-top:5%;
-    width: 15%;
+  .input-wrapper {
+    flex-direction: row;
+    margin-right: -1rem;
+  }
+  .all-buttons {
+    margin: 0;
+    margin: 10px 0;
   }
   .gameInstructions {
     padding: 4rem, 2rem;
-    font-size: small;
   }
   .guess-counter {
     position: absolute;
-    top: 15%;
+    top: 20%;
     left: 4%;
   }
-  .opponentText {
-    position: absolute;
-    right: 20%;
-    top: 20%;
-    font-size: small;
+  .present-opponent {
+    flex-direction: column;
+  }
+  .opponent-start {
+    display: flx;
+  }
+  .logo-img-start {
+    width: 30vw;
+  }
+  .sound-bar {
+    border: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  p {
+    margin: 0;
   }
 }
