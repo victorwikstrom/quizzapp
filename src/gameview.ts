@@ -103,7 +103,11 @@ class GameView {
         this.stopTimer;
         this.userNumber = 0;
         this.getUserAnswer();
-        this.getOpponentAnswers();
+
+        setTimeout(() => {
+          this.getOpponentAnswers();
+        }, 1500);
+        
         this.timeIsUp = false;
       }
     }, 1000);
@@ -246,7 +250,7 @@ class GameView {
 
     setTimeout(() => {
       gameState.updateView("over");
-    }, 500);
+    }, 200);
   }
 
   // Loop through all opponents and print their guesses and leaders response
@@ -271,7 +275,7 @@ class GameView {
             if (op?.guess === this.correctNumber) {
               this.printWinnerMessage(op.name);
             }
-          }, 1000);
+          }, 1500);
           // If opponents guess was incorrect, start next round
           if (i === 2 && op?.guess != this.correctNumber) {
             setTimeout(() => {
