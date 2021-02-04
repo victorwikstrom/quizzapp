@@ -246,7 +246,7 @@ class GameView {
 
     setTimeout(() => {
       gameState.updateView("over");
-    }, 2000);
+    }, 500);
   }
 
   // Loop through all opponents and print their guesses and leaders response
@@ -271,7 +271,7 @@ class GameView {
             if (op?.guess === this.correctNumber) {
               this.printWinnerMessage(op.name);
             }
-          }, 1500);
+          }, 1000);
           // If opponents guess was incorrect, start next round
           if (i === 2 && op?.guess != this.correctNumber) {
             setTimeout(() => {
