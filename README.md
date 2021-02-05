@@ -1,4 +1,4 @@
-# Typescript boilerpate projekt
+# Quiz App - Hi or Low
 
 Klona ner projektet...
 
