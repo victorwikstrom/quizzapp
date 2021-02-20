@@ -10,7 +10,6 @@ class GameView {
 
   private guessButton: HTMLElement;
   private guessCountElement: HTMLElement;
-  // private guessCount: number;
 
   private opponentWrapper: HTMLElement;
   private opponents: Array<Opponent>;
