@@ -4,7 +4,9 @@
   "description": "",
   "main": "code.js",
   "scripts": {
-    "start": "tsc -w"
+    "start": "tsc -w",
+    "build": "netlify-lambda build src",
+    "ts-check": "tsc --noEmit --lib ES2015 ./src/*.ts"
   },
   "keywords": [],
   "author": "",
